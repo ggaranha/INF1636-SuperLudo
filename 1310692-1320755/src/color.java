@@ -1,15 +1,15 @@
 
 public class color {
-	private String Color;
+	private String name;
 	
 	public color(String color)
 	{
-		Color = color;
+		name = color;
 	}
 	
 	public String getColor()
 	{
-		return Color;
+		return name;
 	}
 
 }
