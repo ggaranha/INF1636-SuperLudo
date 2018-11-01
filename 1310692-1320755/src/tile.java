@@ -4,6 +4,7 @@ public class tile {
 	private int posX;
 	private int posY;
 	private color tileColor;
+	private pawn tilePawn;
 	
 	public tile(int x, int y)
 	{
@@ -41,6 +42,15 @@ public class tile {
 	public color getTileColor()
 	{
 		return tileColor;
+	}
+	
+	public boolean isTileEmpty()
+	{
+		if(tilePawn == null)
+		{
+			return true;
+		}
+		return false;
 	}
 
 }

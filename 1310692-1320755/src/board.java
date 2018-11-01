@@ -77,7 +77,7 @@ public class board {
 			tileMap[7][j].setTileColorName("blue");
 		}
 		
-		//setting colors for additional special tiles
+		//setting colors for additional special tiles(casas de saida e abrigos)
 		tileMap[1][8].setTileColorName("red");
 		tileMap[8][13].setTileColorName("green");
 		tileMap[13][6].setTileColorName("yellow");
