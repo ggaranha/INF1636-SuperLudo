@@ -9,4 +9,14 @@ public class pawn {
 		pawnColor = c;
 		pawnPlayer = p;
 	}
+	
+	public color getPawnColor()
+	{
+		return pawnColor;
+	}
+	
+	public player getPawnPlayer()
+	{
+		return pawnPlayer;
+	}
 }

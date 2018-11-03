@@ -1,13 +1,24 @@
 import javax.swing.*;
+import java.awt.*;
 
 
-public class menu extends JFrame{
-	public menu(String s)
+public class menu{
+	JButton newGameMenu;
+	JButton loadGameMenu;
+	JButton saveGameMenu;
+	JLabel currentPlayerText;
+	JButton throwDiceMenu;
+	
+	public menu(JPanel p)
 	{
-		super(s);
-		JButton b;
-		JPanel p = new JPanel();
-		getContentPane().add(p);
-		p.setLayout(new BoxLayout);
+		p.setLayout(new BorderLayout());
+		newGameMenu = new JButton("Novo Jogo");
+		p.add(newGameMenu, BorderLayout.EAST);
+		loadGameMenu = new JButton("Carregar Jogo");
+		p.add(loadGameMenu, BorderLayout.EAST);
+		saveGameMenu = new JButton("Salvar");
+		p.add(saveGameMenu, BorderLayout.EAST);
+		currentPlayerText = new JLabel("A Jogar:");
+		p.add(currentPlayerText, BorderLayout.EAST);
 	}
 }
