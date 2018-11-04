@@ -11,7 +11,6 @@ public class menu{
 	
 	public menu(JPanel p)
 	{
-		p.setLayout(new BorderLayout());
 		newGameMenu = new JButton("Novo Jogo");
 		p.add(newGameMenu, BorderLayout.EAST);
 		loadGameMenu = new JButton("Carregar Jogo");

@@ -8,7 +8,6 @@ public class board {
 		newBoard();
 		
 		
-		
 	}
 	
 	private void newBoard()
