@@ -1,10 +1,12 @@
+import java.awt.Color;
 
 public class tile {
 	
 	private int posX;
 	private int posY;
-	private color tileColor;
+	private Color tileColor;
 	private pawn tilePawn;
+	private int tileType;
 	
 	public tile(int x, int y)
 	{
@@ -12,21 +14,34 @@ public class tile {
 		posY = y;
 	}
 	
-	public tile(int x, int y, color c)
+	public tile(int x, int y, Color c)
 	{
 		posX = x;
 		posY = y;
 		tileColor = c;
 	}
 	
-	public void setTileColor(color c)
+	public void setTileColor(Color c)
 	{
 		tileColor = c;
 	}
 	
 	public void setTileColorName(String n)
 	{
-		tileColor = new color(n);
+		tileColor = Color.getColor(n);
+	}
+	
+	public void setTileType(int n)
+	{
+		/**
+		 * Tipos:
+		 * 0 - Casa comum
+		 * 1 - Abrigo
+		 * 2 - Casa inicial
+		 * 3 - Barreira
+		 *
+		 */
+		tileType = n;
 	}
 	
 	public int getPosX()
@@ -39,7 +54,17 @@ public class tile {
 		return posY;
 	}
 	
-	public color getTileColor()
+	public double getCoordX()
+	{
+		return (double)posX*30.0;
+	}
+	
+	public double getCoordY()
+	{
+		return (double)posY*30.0;
+	}
+	
+	public Color getTileColor()
 	{
 		return tileColor;
 	}

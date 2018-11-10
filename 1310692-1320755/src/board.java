@@ -1,3 +1,4 @@
+import java.awt.Color;
 
 public class board {
 	
@@ -5,9 +6,14 @@ public class board {
 	
 	public board()
 	{
+		tileMap = new tile[15][15];
 		newBoard();
 		
-		
+	}
+	
+	public tile getTile(int x, int y)
+	{
+		return tileMap[x][y];
 	}
 	
 	private void newBoard()
@@ -19,7 +25,7 @@ public class board {
 		{
 			for(j=0;j<15;j++)
 			{
-				tileMap[i][j] = new tile(i,j, new color("white"));
+				tileMap[i][j] = new tile(i,j, Color.WHITE);
 			}
 		}
 		
@@ -28,7 +34,7 @@ public class board {
 		{
 			for(j=0;j<6;j++)
 			{
-				tileMap[i][j].setTileColorName("blue");
+				tileMap[i][j].setTileColor(Color.RED);
 			}
 		}
 		
@@ -36,7 +42,7 @@ public class board {
 		{
 			for(j=9;j<15;j++)
 			{
-				tileMap[i][j].setTileColorName("red");
+				tileMap[i][j].setTileColor(Color.BLUE);
 			}
 		}
 		
@@ -44,7 +50,7 @@ public class board {
 		{
 			for(j=0;j<6;j++)
 			{
-				tileMap[i][j].setTileColorName("yellow");
+				tileMap[i][j].setTileColor(Color.GREEN);
 			}
 		}
 		
@@ -52,39 +58,39 @@ public class board {
 		{
 			for(j=9;j<15;j++)
 			{
-				tileMap[i][j].setTileColorName("green");
+				tileMap[i][j].setTileColor(Color.YELLOW);
 			}
 		}
 		
 		for(i=1;i<7;i++)
 		{
-			tileMap[i][7].setTileColorName("red");
+			tileMap[i][7].setTileColor(Color.RED);
 		}
 		
 		for(i=8;i<14;i++)
 		{
-			tileMap[i][7].setTileColorName("yellow");
+			tileMap[i][7].setTileColor(Color.YELLOW);
 		}
 		
 		for(j=1;j<7;j++)
 		{
-			tileMap[7][j].setTileColorName("green");
+			tileMap[7][j].setTileColor(Color.GREEN);
 		}
 		
 		for(j=8;j<14;j++)
 		{
-			tileMap[7][j].setTileColorName("blue");
+			tileMap[7][j].setTileColor(Color.BLUE);
 		}
 		
 		//setting colors for additional special tiles(casas de saida e abrigos)
-		tileMap[1][8].setTileColorName("red");
-		tileMap[8][13].setTileColorName("green");
-		tileMap[13][6].setTileColorName("yellow");
-		tileMap[6][1].setTileColorName("blue");
-		tileMap[8][1].setTileColorName("black");
-		tileMap[1][6].setTileColorName("black");
-		tileMap[13][8].setTileColorName("black");
-		tileMap[6][13].setTileColorName("black");
+		tileMap[1][6].setTileColor(Color.RED);
+		tileMap[8][1].setTileColor(Color.GREEN);
+		tileMap[13][8].setTileColor(Color.YELLOW);
+		tileMap[6][13].setTileColor(Color.BLUE);
+		tileMap[8][13].setTileColor(Color.BLACK);
+		tileMap[1][8].setTileColor(Color.BLACK);
+		tileMap[13][6].setTileColor(Color.BLACK);
+		tileMap[6][1].setTileColor(Color.BLACK);
 		
 	}
 

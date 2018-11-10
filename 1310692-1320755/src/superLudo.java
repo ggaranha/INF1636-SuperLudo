@@ -1,12 +1,27 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class superLudo extends JFrame{
-	JPanel p;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3411683330786988583L;
+	
+	
+	private JPanel p;
+	private game superLudoGame;
+	private menu gameMenu;
 	
 	public superLudo(String s) {
 		super(s);
-		setSize(600,450);
+		setSize(600,500);
 		p = new JPanel();
+		p.setBackground(Color.WHITE);
+		superLudoGame = new game(p);
+		p.add(superLudoGame, BorderLayout.CENTER);
+		gameMenu = new menu(p);
 		getContentPane().add(p);
 	}
 	

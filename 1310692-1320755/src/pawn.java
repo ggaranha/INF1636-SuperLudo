@@ -1,16 +1,17 @@
+import java.awt.Color;
 
 public class pawn {
 	
-	private color pawnColor;
+	private Color pawnColor;
 	private player pawnPlayer;
 	
-	public pawn(color c, player p)
+	public pawn(Color c, player p)
 	{
 		pawnColor = c;
 		pawnPlayer = p;
 	}
 	
-	public color getPawnColor()
+	public Color getPawnColor()
 	{
 		return pawnColor;
 	}

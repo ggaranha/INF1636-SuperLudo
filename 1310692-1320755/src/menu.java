@@ -2,12 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class menu{
-	JButton newGameMenu;
-	JButton loadGameMenu;
-	JButton saveGameMenu;
-	JLabel currentPlayerText;
-	JButton throwDiceMenu;
+public class menu extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9195280542628481358L;
+	
+	
+	private JButton newGameMenu;
+	private JButton loadGameMenu;
+	private JButton saveGameMenu;
+	private JLabel currentPlayerText;
+	private JButton throwDiceMenu;
 	
 	public menu(JPanel p)
 	{
