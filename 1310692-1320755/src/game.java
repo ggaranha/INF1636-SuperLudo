@@ -19,10 +19,10 @@ public class game extends JPanel{
 		gameDice = new dice();
 		j.setLayout(new BorderLayout());
 		gamePlayers = new player[4];
-		gamePlayers[0] = new player("Vermelho", Color.RED, gameBoard.getTile(1, 6));
-		gamePlayers[1] = new player("Verde", Color.GREEN, gameBoard.getTile(8, 1));
-		gamePlayers[2] = new player("Azul", Color.BLUE, gameBoard.getTile(6, 13));
-		gamePlayers[3] = new player("Amarelo", Color.YELLOW, gameBoard.getTile(13, 8));
+		gamePlayers[0] = new player("Vermelho", Color.RED, gameBoard, gameBoard.getTile(1, 6), 0, 0);
+		gamePlayers[1] = new player("Verde", Color.GREEN, gameBoard, gameBoard.getTile(8, 1), 9, 0);
+		gamePlayers[2] = new player("Azul", Color.BLUE, gameBoard, gameBoard.getTile(6, 13), 0, 9);
+		gamePlayers[3] = new player("Amarelo", Color.YELLOW, gameBoard, gameBoard.getTile(13, 8), 9, 9);
 	}
 	
 	public void paintComponent(Graphics g)
@@ -32,40 +32,11 @@ public class game extends JPanel{
 		
 		g2d.setBackground(Color.WHITE);
 		
-		int i,j;
-		tile refTile;
-		for(i=0;i<15;i++)
-		{
-			for(j=0;j<15;j++)
-			{
-				refTile= gameBoard.getTile(i, j);
-				g2d.setColor(refTile.getTileColor());
-				g2d.setBackground(refTile.getTileColor());
-				g2d.fill(new Rectangle2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
-				g2d.setColor(Color.BLACK);
-				g2d.draw(new Rectangle2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
-			}
-		}
+		displayBoard.paintBoard(g2d, gameBoard);
 		
-		/**for(i=6;i<9;i++)
-		{
-			for(j=0;j<15;j++)
-			{
-				refTile= gameBoard.getTile(i, j);
-				g2d.setColor(Color.BLACK);
-				g2d.draw(new Rectangle2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
-			}
-		}
+		displayPawns.paintPawns(g2d, gameBoard, gamePlayers);
 		
-		for(i=0;i<15;i++)
-		{
-			for(j=6;j<9;j++)
-			{
-				refTile= gameBoard.getTile(i, j);
-				g2d.setColor(Color.BLACK);
-				g2d.draw(new Rectangle2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
-			}
-		}*/
+		
 	}
 	
 }

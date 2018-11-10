@@ -39,9 +39,15 @@ public class tile {
 		 * 1 - Abrigo
 		 * 2 - Casa inicial
 		 * 3 - Barreira
-		 *
+		 * 4 - Casa de saída
+		 * 5 - Casa final
 		 */
 		tileType = n;
+	}
+	
+	public int getTileType(int n)
+	{
+		return tileType;
 	}
 	
 	public int getPosX()
@@ -67,6 +73,16 @@ public class tile {
 	public Color getTileColor()
 	{
 		return tileColor;
+	}
+	
+	public void setTilePawn(pawn p)
+	{
+		tilePawn = p;
+	}
+	
+	public pawn getTilePawn()
+	{
+		return tilePawn;
 	}
 	
 	public boolean isTileEmpty()
