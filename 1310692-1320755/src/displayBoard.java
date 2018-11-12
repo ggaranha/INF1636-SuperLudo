@@ -98,6 +98,15 @@ public class displayBoard{
 		g2d.fill(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
 		refTile= b.getTile(x+4, y+4);
 		g2d.fill(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
+		g2d.setColor(Color.BLACK);
+		refTile= b.getTile(x+1, y+1);
+		g2d.draw(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
+		refTile= b.getTile(x+4, y+1);
+		g2d.draw(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
+		refTile= b.getTile(x+1, y+4);
+		g2d.draw(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
+		refTile= b.getTile(x+4, y+4);
+		g2d.draw(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
 	}
 	
 }

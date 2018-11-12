@@ -18,6 +18,7 @@ public class superLudo extends JFrame{
 		super(s);
 		setSize(600,500);
 		p = new JPanel();
+		p.setLayout(new BorderLayout());
 		p.setBackground(Color.WHITE);
 		superLudoGame = new game(p);
 		p.add(superLudoGame, BorderLayout.CENTER);

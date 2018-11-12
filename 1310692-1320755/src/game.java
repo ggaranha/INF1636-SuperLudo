@@ -17,7 +17,7 @@ public class game extends JPanel{
 	{
 		gameBoard = new board();
 		gameDice = new dice();
-		j.setLayout(new BorderLayout());
+		
 		gamePlayers = new player[4];
 		gamePlayers[0] = new player("Vermelho", Color.RED, gameBoard, gameBoard.getTile(1, 6), 0, 0);
 		gamePlayers[1] = new player("Verde", Color.GREEN, gameBoard, gameBoard.getTile(8, 1), 9, 0);
