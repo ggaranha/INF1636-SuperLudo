@@ -55,6 +55,8 @@ public class displayBoard{
 		paintHouseCircles(g2d, b, 9, 0);
 		paintHouseCircles(g2d, b, 9, 9);
 		
+		paintExitHouse(g2d, b);
+		
 		/**for(i=6;i<9;i++)
 		{
 			for(j=0;j<15;j++)
@@ -107,6 +109,45 @@ public class displayBoard{
 		g2d.draw(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
 		refTile= b.getTile(x+4, y+4);
 		g2d.draw(new Ellipse2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
+	}
+	
+	private static void paintExitHouse(Graphics2D g2d, board b)
+	{
+		int xMiddle;
+		int yMiddle;
+		tile refTile;
+		
+		refTile= b.getTile(7, 7);
+		xMiddle = (int)refTile.getCoordX() + 15;
+		yMiddle = (int)refTile.getCoordY() + 15;
+		
+		int redPointsX[] = {(int)b.getTile(6, 6).getCoordX(), (int)b.getTile(6, 9).getCoordX(), xMiddle};
+		int redPointsY[] = {(int)b.getTile(6, 6).getCoordY(), (int)b.getTile(6, 9).getCoordY(), yMiddle};
+		
+		int bluePointsX[] = {(int)b.getTile(6, 9).getCoordX(), (int)b.getTile(9, 9).getCoordX(), xMiddle};
+		int bluePointsY[] = {(int)b.getTile(6, 9).getCoordY(), (int)b.getTile(9, 9).getCoordY(), yMiddle};
+		
+		int greenPointsX[] = {(int)b.getTile(6, 6).getCoordX(), (int)b.getTile(9, 6).getCoordX(), xMiddle};
+		int greenPointsY[] = {(int)b.getTile(6, 6).getCoordY(), (int)b.getTile(9, 6).getCoordY(), yMiddle};
+		
+		int yellowPointsX[] = {(int)b.getTile(9, 6).getCoordX(), (int)b.getTile(9, 9).getCoordX(), xMiddle};
+		int yellowPointsY[] = {(int)b.getTile(9, 6).getCoordY(), (int)b.getTile(9, 9).getCoordY(), yMiddle};
+		
+		g2d.setColor(Color.RED);
+		g2d.fillPolygon(redPointsX, redPointsY, 3);
+		g2d.setColor(Color.BLUE);
+		g2d.fillPolygon(bluePointsX, bluePointsY, 3);
+		g2d.setColor(Color.GREEN);
+		g2d.fillPolygon(greenPointsX, greenPointsY, 3);
+		g2d.setColor(Color.YELLOW);
+		g2d.fillPolygon(yellowPointsX, yellowPointsY, 3);
+		
+		g2d.setColor(Color.BLACK);
+		g2d.drawPolygon(redPointsX, redPointsY, 3);
+		g2d.drawPolygon(bluePointsX, bluePointsY, 3);
+		g2d.drawPolygon(greenPointsX, greenPointsY, 3);
+		g2d.drawPolygon(yellowPointsX, yellowPointsY, 3);
+		
 	}
 	
 }
