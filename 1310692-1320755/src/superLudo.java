@@ -13,20 +13,28 @@ public class superLudo extends JFrame{
 	private static final long serialVersionUID = 3411683330786988583L;
 	
 	
-	private JPanel p;
+	private JPanel boardPanel;
+	private JPanel menuPanel;
 	private game superLudoGame;
 	private menu gameMenu;
 	
 	public superLudo(String s) {
 		super(s);
-		setSize(600,500);
-		p = new JPanel();
-		p.setLayout(new BorderLayout());
-		p.setBackground(Color.WHITE);
-		superLudoGame = new game(p);
-		p.add(superLudoGame, BorderLayout.CENTER);
-		gameMenu = new menu(p);
-		getContentPane().add(p);
+		setSize(630,500);
+		setLayout(null);
+		boardPanel = new JPanel();
+		boardPanel.setLayout(new BorderLayout());
+		boardPanel.setBackground(Color.WHITE);
+		superLudoGame = new game();
+		boardPanel.add(superLudoGame);
+		menuPanel = new JPanel();
+		menuPanel.setLayout(null);
+		gameMenu = new menu(menuPanel);
+		
+		getContentPane().add(menuPanel);
+		menuPanel.setBounds(460, 0, 170, 500);
+		getContentPane().add(boardPanel);
+		boardPanel.setBounds(0, 0, 460, 500);
 	}
 	
 	public static void main(String[] args)

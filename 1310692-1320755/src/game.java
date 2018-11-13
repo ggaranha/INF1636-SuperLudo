@@ -13,7 +13,7 @@ public class game extends JPanel{
 	private player gamePlayers[];
 	
 	
-	public game(JPanel j)
+	public game()
 	{
 		gameBoard = new board();
 		gameDice = new dice();
@@ -21,8 +21,8 @@ public class game extends JPanel{
 		gamePlayers = new player[4];
 		gamePlayers[0] = new player("Vermelho", Color.RED, gameBoard, gameBoard.getTile(1, 6), 0, 0);
 		gamePlayers[1] = new player("Verde", Color.GREEN, gameBoard, gameBoard.getTile(8, 1), 9, 0);
-		gamePlayers[2] = new player("Azul", Color.BLUE, gameBoard, gameBoard.getTile(6, 13), 0, 9);
-		gamePlayers[3] = new player("Amarelo", Color.YELLOW, gameBoard, gameBoard.getTile(13, 8), 9, 9);
+		gamePlayers[2] = new player("Amarelo", Color.YELLOW, gameBoard, gameBoard.getTile(13, 8), 9, 9);
+		gamePlayers[3] = new player("Azul", Color.BLUE, gameBoard, gameBoard.getTile(6, 13), 0, 9);
 	}
 	
 	public void paintComponent(Graphics g)
