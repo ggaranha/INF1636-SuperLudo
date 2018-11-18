@@ -3,10 +3,12 @@ import java.awt.event.MouseListener;
 
 class boardMouseListener implements MouseListener {
 	
+	private notificationsManager notesManager;
+	
 		
-	public boardMouseListener()
+	public boardMouseListener(notificationsManager nManager)
 	{
-		
+		notesManager = nManager;
 	}
 
 	@Override
@@ -42,6 +44,7 @@ class boardMouseListener implements MouseListener {
 		try {
 			actionManager.getInstance().executeAction(x, y);
 		} catch (Exception ex) {
+			notesManager.notifyError("Erro ao executar ação:\n" + ex.getMessage());
 		}
 
 	}

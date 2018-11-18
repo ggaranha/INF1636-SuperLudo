@@ -10,7 +10,6 @@ public class player {
 	
 	public player(String name, Color c, board b, tile exitTile, int x, int y)
 	{
-		int i;
 		playerName = name;
 		playerColor = c;
 		playerExitTile = exitTile;
@@ -60,6 +59,11 @@ public class player {
 	public tile getPlayerExitTile()
 	{
 		return playerExitTile;
+	}
+	
+	public tile getPlayerPawnBeginTile(int n)
+	{
+		return playerPawnBeginTile[n];
 	}
 	
 	public Color getPlayerColor()
