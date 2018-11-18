@@ -40,9 +40,26 @@ public class player {
 		return false;
 	}
 	
+	public boolean isPlayerBeginTile(tile t)
+	{
+		for(int i=0; i< 4; i++)
+		{
+			if(playerPawnBeginTile[i].equals(t))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public pawn getPlayerPawn(int n)
 	{
 		return playerPawn[n];
+	}
+	
+	public tile getPlayerExitTile()
+	{
+		return playerExitTile;
 	}
 	
 	public Color getPlayerColor()

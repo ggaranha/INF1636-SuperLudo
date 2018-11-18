@@ -1,6 +1,9 @@
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Observable;
 
 public class game extends JPanel{
 	/**
@@ -11,6 +14,7 @@ public class game extends JPanel{
 	private board gameBoard;
 	private dice gameDice;
 	private player gamePlayers[];
+	private player currentPlayer;
 	
 	
 	public game()
@@ -23,7 +27,29 @@ public class game extends JPanel{
 		gamePlayers[1] = new player("Verde", Color.GREEN, gameBoard, gameBoard.getTile(8, 1), 9, 0);
 		gamePlayers[2] = new player("Amarelo", Color.YELLOW, gameBoard, gameBoard.getTile(13, 8), 9, 9);
 		gamePlayers[3] = new player("Azul", Color.BLUE, gameBoard, gameBoard.getTile(6, 13), 0, 9);
+		
+		currentPlayer = gamePlayers[0];
 	}
+	
+	public void nextPlayer()
+	{
+		int i = 0;
+		
+		while(!currentPlayer.equals(gamePlayers[i]))
+		{
+			i++;
+		}
+		
+		if(i==3)
+		{
+			currentPlayer = gamePlayers[0];
+		}
+		else
+		{
+			currentPlayer = gamePlayers[i+1];
+		}
+	}
+	
 	
 	public void paintComponent(Graphics g)
 	{
@@ -38,5 +64,6 @@ public class game extends JPanel{
 		
 		
 	}
+	
 	
 }

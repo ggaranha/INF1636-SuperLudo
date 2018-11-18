@@ -80,6 +80,11 @@ public class tile {
 		tilePawn = p;
 	}
 	
+	public void removeTilePawn()
+	{
+		tilePawn = null;
+	}
+	
 	public pawn getTilePawn()
 	{
 		return tilePawn;

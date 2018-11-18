@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 
@@ -17,6 +19,15 @@ public class superLudo extends JFrame{
 	private JPanel menuPanel;
 	private game superLudoGame;
 	private menu gameMenu;
+	
+	private ActionListener newGameListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			superLudoGame = new game();
+			boardPanel.add(superLudoGame);
+		}
+	};
 	
 	public superLudo(String s) {
 		super(s);
