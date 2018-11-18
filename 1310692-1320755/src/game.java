@@ -1,11 +1,10 @@
 import javax.swing.*;
 
-
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Observable;
 
-public class game extends JPanel{
+public class game extends Observable{
 	/**
 	 * 
 	 */
@@ -15,6 +14,8 @@ public class game extends JPanel{
 	private dice gameDice;
 	private player gamePlayers[];
 	private player currentPlayer;
+	
+	private action currentAction;
 	
 	
 	public game()
@@ -29,6 +30,26 @@ public class game extends JPanel{
 		gamePlayers[3] = new player("Azul", Color.BLUE, gameBoard, gameBoard.getTile(6, 13), 0, 9);
 		
 		currentPlayer = gamePlayers[0];
+	}
+	
+	public board getGameBoard()
+	{
+		return gameBoard;
+	}
+	
+	public dice getGameDice()
+	{
+		return gameDice;
+	}
+	
+	public player getCurrentPlayer()
+	{
+		return currentPlayer;
+	}
+	
+	public player[] getGamePlayers()
+	{
+		return gamePlayers;
 	}
 	
 	public void nextPlayer()
@@ -50,20 +71,19 @@ public class game extends JPanel{
 		}
 	}
 	
-	
-	public void paintComponent(Graphics g)
+	public action getCurrentAction() 
 	{
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D)g;
-		
-		g2d.setBackground(Color.WHITE);
-		
-		displayBoard.paintBoard(g2d, gameBoard);
-		
-		displayPawns.paintPawns(g2d, gameBoard, gamePlayers);
-		
-		
+		return currentAction;
+	}
+
+	public void setCurrentAction(action currentAction) 
+	{
+		currentAction = currentAction;
 	}
 	
+	public void setChanged()
+	{
+		super.setChanged();
+	}
 	
 }
