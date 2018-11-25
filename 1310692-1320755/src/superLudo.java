@@ -73,9 +73,7 @@ public class superLudo extends JFrame{
 		/*/////////// END SET GAME ////////// */
 		
 		/*/////////// START DICE ROLLING ////////// */
-		dice d = new dice();
-		
-		int value = d.roll();
+	
         
         /*/////////// END DICE ROLLING /////////// */
         

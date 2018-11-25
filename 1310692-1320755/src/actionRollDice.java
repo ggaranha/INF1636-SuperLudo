@@ -1,22 +1,11 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-
-public class actionRollDice extends action{
+public class actionRollDice implements ActionListener{
 	
-	private dice diceRef;
-	
-	public actionRollDice(actionListener actionListener, dice d) throws Exception
-	{
-		super(actionListener);
+	public void actionPerformed(ActionEvent event) {
 		
-		diceRef=d;
-	}
-
-	@Override
-	public void execute()
-	{
-		actionManager.getInstance().resetActions();
 		
-		diceRef.roll();
 	}
 
 }
