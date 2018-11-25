@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 
 
 public class menu extends JPanel{
@@ -19,12 +20,15 @@ public class menu extends JPanel{
 	public JLabel diceImage;
 	public int diceNumber;
 	public ButtonGroup diceOptions;
+	public Insets in;
+	public game currentG;
 	
 	
-	public menu(JPanel p)
+	public menu(JPanel p, game currentGame)
 	{
 		Dimension size;
-		Insets in = p.getInsets();
+		in = p.getInsets();
+		currentG = currentGame;
 		
 		newGameMenu = new JButton("Novo Jogo");
 		p.add(newGameMenu);
@@ -54,6 +58,11 @@ public class menu extends JPanel{
 		DiceRollAction throwAction = new DiceRollAction(p, size, in);
 		throwDiceMenu.addActionListener(throwAction);
 		
+		diceManual(p, size, in);
+		
+	}
+	
+	public void diceManual(JPanel p, Dimension size, Insets in) {
 		diceImage = new JLabel();
 		
 		diceOptions =  new ButtonGroup();
@@ -109,7 +118,6 @@ public class menu extends JPanel{
 		four.addActionListener(fourAction);
 		five.addActionListener(fiveAction);
 		six.addActionListener(sixAction);
-		
 	}
 	
 	public void paintDice(String name, JPanel p, Dimension size, Insets in) {
@@ -202,6 +210,24 @@ public class menu extends JPanel{
 		
 		private int dNumber;
 
+	}
+	
+	public void paintComponent(Graphics g) {
+		
+		System.out.println("Oi");
+		
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D)g;
+		
+		Rectangle2D rect = new Rectangle2D.Double(22 + in.left, 260 + in.top, 300, 300);
+		
+		g2.draw(rect);
+		
+		g2.setPaint(currentG.getCurrentPlayer().getPlayerColor());
+				
+		g2.fill(rect);	
+		
+			
 	}
 }
 

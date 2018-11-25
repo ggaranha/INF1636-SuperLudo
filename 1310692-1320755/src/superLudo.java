@@ -45,7 +45,7 @@ public class superLudo extends JFrame{
 		boardPanel.add(gPanel);
 		menuPanel = new JPanel();
 		menuPanel.setLayout(null);
-		gameMenu = new menu(menuPanel);
+		gameMenu = new menu(menuPanel, superLudoGame);
 		
 		gameMenu.newGameMenu.addActionListener(newGameListener);
 		
