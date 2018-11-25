@@ -11,6 +11,7 @@ public class gameControl
 		mainGame = g;
 		notifManager = nm;
 	}
+}
 
 	/**private actionListener diceActionListener = new actionListener() {
 
@@ -77,33 +78,5 @@ public class gameControl
 			mainGame.notifyObservers();
 		}
 	};
-
-	private void setPlayerDice()
-	{
-		actionRollDice action;
-
-		try
-		{
-			action = new actionRollDice(diceActionListener, mainGame.getGameDice());
-
-			doubleCoordinate diceCoordinates = YardView.getYardDiceCoordinates(board.getCurrentPlayer());
-			int x = (int) diceCoordinates.getX();
-			int y = (int) diceCoordinates.getY();
-
-			actionManager.getInstance().registerAction(x, y, action);
-			actionManager.getInstance().registerAction(x + 1, y, action);
-			actionManager.getInstance().registerAction(x - 1, y, action);
-			actionManager.getInstance().registerAction(x, y + 1, action);
-			actionManager.getInstance().registerAction(x, y - 1, action);
-
-			actionManager.getInstance().registerAction(x + 1, y + 1, action);
-			actionManager.getInstance().registerAction(x - 1, y - 1, action);
-			actionManager.getInstance().registerAction(x + 1, y - 1, action);
-			actionManager.getInstance().registerAction(x - 1, y + 1, action);
-		} catch (Exception e)
-		{
-			notifManager.notifyError(e.getMessage());
-			e.printStackTrace();
-		}
-	}*/
-}
+	
+}*/

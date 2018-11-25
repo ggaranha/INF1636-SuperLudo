@@ -31,6 +31,8 @@ public class superLudo extends JFrame{
 		}
 	};
 	
+	
+	
 	public superLudo(String s) {
 		super(s);
 		setSize(630,500);
@@ -44,6 +46,8 @@ public class superLudo extends JFrame{
 		menuPanel = new JPanel();
 		menuPanel.setLayout(null);
 		gameMenu = new menu(menuPanel);
+		
+		gameMenu.newGameMenu.addActionListener(newGameListener);
 		
 		getContentPane().add(menuPanel);
 		menuPanel.setBounds(460, 0, 170, 500);

@@ -6,8 +6,13 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-public class gamePanel extends JPanel implements  Observer{
+public class gamePanel extends JPanel implements Observer{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7879897766817219004L;
+
 	private static gamePanel instance = null;
 	
 	private game mainGame;

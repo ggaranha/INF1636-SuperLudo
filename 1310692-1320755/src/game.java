@@ -1,15 +1,11 @@
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.Color;
 import java.util.Observable;
 
 public class game extends Observable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2821674216135980312L;
-	
+
 	private board gameBoard;
 	private dice gameDice;
 	private player gamePlayers[];
@@ -19,6 +15,11 @@ public class game extends Observable{
 	
 	
 	public game()
+	{
+		resetGame();
+	}
+	
+	public void resetGame()
 	{
 		gameBoard = new board();
 		gameDice = new dice();
@@ -76,9 +77,9 @@ public class game extends Observable{
 		return currentAction;
 	}
 
-	public void setCurrentAction(action currentAction) 
+	public void setCurrentAction(action ca) 
 	{
-		currentAction = currentAction;
+		currentAction = ca;
 	}
 	
 	public void setChanged()
