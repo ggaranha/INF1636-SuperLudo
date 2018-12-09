@@ -19,6 +19,16 @@ public class game extends Observable{
 		resetGame();
 	}
 	
+	public game(board b, player[] gp, dice d, int pIndex)
+	{
+		gameBoard = b;
+		gameDice = d;
+		
+		gamePlayers = gp;
+		
+		currentPlayer = gamePlayers[pIndex];
+	}
+	
 	public void resetGame()
 	{
 		gameBoard = new board();
@@ -48,6 +58,11 @@ public class game extends Observable{
 		return currentPlayer;
 	}
 	
+	public player getPlayerByIndex(int i)
+	{
+		return gamePlayers[i];
+	}
+	
 	public player[] getGamePlayers()
 	{
 		return gamePlayers;
@@ -70,6 +85,34 @@ public class game extends Observable{
 		{
 			currentPlayer = gamePlayers[i+1];
 		}
+	}
+	
+	public int getPlayerIndex()
+	{
+		for(int i=0;i<4;i++)
+		{
+			if(currentPlayer==gamePlayers[i])
+			{
+				return i;
+			}
+		}
+		
+		return -1;
+		
+	}
+	
+	public int getColorIndex(Color c)
+	{
+		for(int i=0;i<4;i++)
+		{
+			if(c==gamePlayers[i].getPlayerColor())
+			{
+				return i;
+			}
+		}
+		
+		return -1;
+		
 	}
 	
 	public action getCurrentAction() 

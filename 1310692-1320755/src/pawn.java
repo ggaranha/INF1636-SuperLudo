@@ -7,6 +7,11 @@ public class pawn {
 	private tile pawnTile;
 	private int pawnWalkCount;
 	
+	public pawn()
+	{
+		
+	}
+	
 	public pawn(Color c, player p, tile t)
 	{
 		pawnColor = c;
@@ -33,5 +38,10 @@ public class pawn {
 	public int getPawnWalkCount()
 	{
 		return pawnWalkCount;
+	}
+	
+	public void setPawnTile(tile t)
+	{
+		pawnTile = t;
 	}
 }

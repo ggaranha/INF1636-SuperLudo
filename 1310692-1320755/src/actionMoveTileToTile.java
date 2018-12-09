@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class actionMoveTileToTile extends action{
+/**public class actionMoveTileToTile extends action{
 	
 	private game mainGame;
 	private tile fromTile;
@@ -14,7 +14,7 @@ public class actionMoveTileToTile extends action{
 		super(ac);
 		mainGame = g;
 		fromTile = ft;
-		fromTilePawn = fromTile.getTilePawn();
+		fromTilePawn = fromTile.getTilePawn(g.getCurrentPlayer().getPlayerColor());
 		toTile = tt;
 		toTileType = ttType;
 		shouldRemoveOpponent = rm;
@@ -62,4 +62,4 @@ public class actionMoveTileToTile extends action{
 		//gameControl.lastMovedPawnDestinationType = SquareType.TRACKSQUARE;
 	}
 
-}
+}*/

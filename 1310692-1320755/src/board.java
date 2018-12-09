@@ -70,32 +70,36 @@ public class board {
 		for(i=1;i<7;i++)
 		{
 			tileMap[i][7].setTileColor(Color.RED);
+			tileMap[i][7].setTileType(3);
 		}
 		
 		for(i=8;i<14;i++)
 		{
 			tileMap[i][7].setTileColor(Color.YELLOW);
+			tileMap[i][7].setTileType(3);
 		}
 		
 		for(j=1;j<7;j++)
 		{
 			tileMap[7][j].setTileColor(Color.GREEN);
+			tileMap[7][j].setTileType(3);
 		}
 		
 		for(j=8;j<14;j++)
 		{
 			tileMap[7][j].setTileColor(Color.BLUE);
+			tileMap[7][j].setTileType(3);
 		}
 		
 		//setting colors for additional special tiles(casas de saida e abrigos)
 		tileMap[1][6].setTileColor(Color.RED);
-		tileMap[1][6].setTileType(4);
+		tileMap[1][6].setTileType(5);
 		tileMap[8][1].setTileColor(Color.GREEN);
-		tileMap[8][1].setTileType(4);
+		tileMap[8][1].setTileType(5);
 		tileMap[13][8].setTileColor(Color.YELLOW);
-		tileMap[13][8].setTileType(4);
+		tileMap[13][8].setTileType(5);
 		tileMap[6][13].setTileColor(Color.BLUE);
-		tileMap[6][13].setTileType(4);
+		tileMap[6][13].setTileType(5);
 		tileMap[8][13].setTileColor(Color.BLACK);
 		tileMap[8][13].setTileType(1);
 		tileMap[1][8].setTileColor(Color.BLACK);
@@ -104,6 +108,15 @@ public class board {
 		tileMap[13][6].setTileType(1);
 		tileMap[6][1].setTileColor(Color.BLACK);
 		tileMap[6][1].setTileType(1);
+		tileMap[6][7].setTileType(6);
+		tileMap[7][6].setTileType(6);
+		tileMap[8][7].setTileType(6);
+		tileMap[7][8].setTileType(6);
+		tileMap[6][6].setTileType(7);
+		tileMap[8][6].setTileType(7);
+		tileMap[7][7].setTileType(7);
+		tileMap[6][8].setTileType(7);
+		tileMap[8][8].setTileType(7);
 		
 	}
 }

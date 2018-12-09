@@ -1,17 +1,19 @@
 import java.awt.Color;
+import java.util.*;
 
 public class tile {
 	
 	private int posX;
 	private int posY;
 	private Color tileColor;
-	private pawn tilePawn;
+	private ArrayList<pawn> tilePawns;
 	private int tileType;
 	
 	public tile(int x, int y)
 	{
 		posX = x;
 		posY = y;
+		tilePawns = new ArrayList();
 	}
 	
 	public tile(int x, int y, Color c)
@@ -19,6 +21,7 @@ public class tile {
 		posX = x;
 		posY = y;
 		tileColor = c;
+		tilePawns = new ArrayList();
 	}
 	
 	public void setTileColor(Color c)
@@ -38,14 +41,16 @@ public class tile {
 		 * 0 - Casa comum
 		 * 1 - Abrigo
 		 * 2 - Casa inicial
-		 * 3 - Barreira
-		 * 4 - Casa de saída
-		 * 5 - Casa final
+		 * 3 - Reta final
+		 * 4 - Barreira
+		 * 5 - Casa de saída
+		 * 6 - Casa final
+		 * 7 - Casa indisponível
 		 */
 		tileType = n;
 	}
 	
-	public int getTileType(int n)
+	public int getTileType()
 	{
 		return tileType;
 	}
@@ -75,28 +80,70 @@ public class tile {
 		return tileColor;
 	}
 	
-	public void setTilePawn(pawn p)
+	public void addTilePawn(pawn p)
 	{
-		tilePawn = p;
+		tilePawns.add(p);
+		p.setPawnTile(this);
 	}
 	
-	public void removeTilePawn()
+	public void removeTilePawn(Color c)
 	{
-		tilePawn = null;
+		for (int i = 0; i < tilePawns.size(); i++)
+		{
+			pawn pawnRef = tilePawns.get(i);
+
+			if (pawnRef.getPawnColor() == c)
+			{
+				tilePawns.remove(pawnRef);
+				break;
+			}
+		}
 	}
 	
-	public pawn getTilePawn()
+	public int getPawnCountByColor(Color c)
 	{
-		return tilePawn;
+		int count = 0;
+
+		for (int i = 0; i < tilePawns.size(); i++)
+		{
+			if (tilePawns.get(i).getPawnColor() == c)
+			{
+				count++;
+			}
+		}
+
+		return count;
+	}
+	
+	
+	public int getTilePawnCount()
+	{
+		return tilePawns.size();
 	}
 	
 	public boolean isTileEmpty()
 	{
-		if(tilePawn == null)
+		if(tilePawns.isEmpty())
 		{
 			return true;
 		}
 		return false;
 	}
+	
+	public List<Color> getPawnsColors()
+	{
+		List<Color> colors = new ArrayList<Color>();
 
+		tilePawns.forEach(pawnRef ->
+		{
+			Color c = pawnRef.getPawnColor();
+
+			if (!colors.contains(c))
+			{
+				colors.add(c);
+			}
+		});
+
+		return colors;
+	}
 }

@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class dice extends Applet{
+public class dice{
 	private int valueDice;
+	
+	private int consecutive6 = 0;
 	
 	public dice()
 	{
@@ -20,7 +22,7 @@ public class dice extends Applet{
 		}
 		else
 		{
-			
+			valueDice = i;
 		}
 	}
 	
@@ -29,22 +31,27 @@ public class dice extends Applet{
 		return valueDice;
 	}
 	
+	public int getConsecutive6()
+	{
+		return consecutive6;
+	}
+	
+	public void resetConsecutive6()
+	{
+		consecutive6 = 0;
+	}
+	
+	public void setConsecutive6(int value)
+	{
+		consecutive6 = value;
+	}
+	
 	public int roll() {
-		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-		Image img1 = null;
-		Graphics g = img.getGraphics();
-		URL url1 = getCodeBase();
 		
 		valueDice = (int) (Math.random() * 6) + 1;
-		valueDice = 1;
 		
-		switch(valueDice) {
-			
-		case 1:
-			img1 = getImage(url1, "img/Dado1.png");
-		}
-		
-		g.drawImage(img1, 60, 120, null);
+		if (valueDice == 6)
+			consecutive6++;
 		
 		return valueDice;
 	}

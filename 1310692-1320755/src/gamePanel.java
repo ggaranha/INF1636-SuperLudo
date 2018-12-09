@@ -59,7 +59,7 @@ public class gamePanel extends JPanel implements Observer{
 		
 		if(refTile != null)
 		{
-			g2d.setColor(Color.BLACK);
+			g2d.setColor(Color.ORANGE);
 			g2d.draw(new Rectangle2D.Double(refTile.getCoordX(), refTile.getCoordY(), 30, 30));
 		}
 		
@@ -114,14 +114,6 @@ public class gamePanel extends JPanel implements Observer{
 			refresh();
 		}
 	}
-	
-	/**private void teleport()
-	{
-		if(refPawn==null)
-		{
-			if(refTile.)
-		}
-	}*/
 	
 	private void refresh() {
 		try {

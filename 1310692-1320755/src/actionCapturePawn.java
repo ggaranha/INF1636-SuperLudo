@@ -22,15 +22,15 @@ public class actionCapturePawn extends action{
 	{
 		tile beginRef;
 		
-		tileCapturedRef.removeTilePawn();
-		tileCapturedRef.setTilePawn(capturedPawnRef);
+		tileCapturedRef.removeTilePawn(capturedPawnRef.getPawnColor());
+		tileCapturedRef.addTilePawn(capturedPawnRef);
 		
 		for(int i=0;i<4;i++)
 		{
 			beginRef = playerCapturedRef.getPlayerPawnBeginTile(i);
 			if(beginRef.isTileEmpty())
 			{
-				beginRef.setTilePawn(capturedPawnRef);
+				beginRef.addTilePawn(capturedPawnRef);
 				break;
 			}
 		}

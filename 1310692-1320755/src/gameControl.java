@@ -1,19 +1,72 @@
+
 public class gameControl
 {
 
 	private game mainGame;
 	
+	public static int lastMovedPawnPosX;
+	public static int lastMovedPawnPosY;
+	public static int lastMovedPawnTileType;
 	
+	private IViewManager viewManager;
 	private notificationsManager notifManager;
 
-	public gameControl(game g, notificationsManager nm)
+	public gameControl(game g, notificationsManager nm, IViewManager vm)
 	{
 		mainGame = g;
 		notifManager = nm;
+		viewManager = vm;
 	}
+
+	
+	private actionListener moveFromBeginToExitTileActionListener = new actionListener() {
+
+		@Override
+		public void onActionExecuted(boolean capturedPawn)
+		{
+			
+			viewManager.resetHighlights();
+
+			if (mainGame.getGameDice().getValueDice() != 6 || mainGame.getGameDice().getConsecutive6() == 3)
+			{
+				mainGame.nextPlayer();
+			}
+			else if(mainGame.getGameDice().getValueDice() == 6)
+			{
+				notifManager.notify6RepeatMove();
+			}
+			
+			mainGame.setChanged();
+			mainGame.notifyObservers();
+		}
+
+	};
+	
+	private void setPlayerBeginToExitMoves()
+	{
+		viewManager.resetHighlights();
+		
+		actionMoveFromBeginToExitTile action;
+
+		try
+		{
+			action = new actionMoveFromBeginToExitTile(mainGame.getCurrentPlayer(), moveFromBeginToExitTileActionListener);
+		} catch (Exception e)
+		{
+			notifManager.notifyError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public board getLoadedBoard()
+	{
+		return mainGame.getGameBoard();
+	}
+	
+	
 }
 
-	/**private actionListener diceActionListener = new actionListener() {
+/**	private actionListener diceActionListener = new actionListener() {
 
 		@Override
 		public void onActionExecuted(boolean capturedPawn)

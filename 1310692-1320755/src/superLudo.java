@@ -19,6 +19,7 @@ public class superLudo extends JFrame{
 	private gamePanel gPanel;
 	private JPanel menuPanel;
 	private game superLudoGame;
+	private gameControl gc;
 	private menu gameMenu;
 	
 	private ActionListener newGameListener = new ActionListener() {

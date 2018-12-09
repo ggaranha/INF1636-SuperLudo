@@ -27,8 +27,8 @@ public class actionMoveFromBeginToExitTile extends action{
 	{
 		actionManager.getInstance().resetActions();
 		
-		playerRef.getPlayerExitTile().setTilePawn(pawnRef);
-		beginTileRef.removeTilePawn();
+		playerRef.getPlayerExitTile().addTilePawn(pawnRef);
+		beginTileRef.removeTilePawn(pawnRef.getPawnColor());
 	}
 
 }

@@ -1,9 +1,12 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
 
 
 public class menu extends JPanel{
@@ -21,14 +24,16 @@ public class menu extends JPanel{
 	public int diceNumber;
 	public ButtonGroup diceOptions;
 	public Insets in;
-	public game currentG;
+	public game mainGame;
 	
 	
 	public menu(JPanel p, game currentGame)
 	{
+		super();
+		
 		Dimension size;
 		in = p.getInsets();
-		currentG = currentGame;
+		mainGame = currentGame;
 		
 		newGameMenu = new JButton("Novo Jogo");
 		p.add(newGameMenu);
@@ -39,11 +44,13 @@ public class menu extends JPanel{
 		p.add(loadGameMenu);
 		size = loadGameMenu.getPreferredSize();
 		loadGameMenu.setBounds(15 + in.left, 75 + in.top, size.width, size.height);
+		loadGameMenu.addActionListener(loadGameListener);
 		
 		JButton saveGameMenu = new JButton("Salvar Jogo");
 		p.add(saveGameMenu);
 		size = saveGameMenu.getPreferredSize();
 		saveGameMenu.setBounds(25 + in.left, 125 + in.top, size.width, size.height);
+		saveGameMenu.addActionListener(saveGameListener);
 		
 		currentPlayerText = new JLabel("A Jogar:");
 		p.add(currentPlayerText);
@@ -83,27 +90,27 @@ public class menu extends JPanel{
 		
 		p.add(one);
 		size = one.getPreferredSize();
-		one.setBounds(20 + in.left, 370 + in.top, size.width, size.height);
+		one.setBounds(20 + in.left, 390 + in.top, size.width, size.height);
 		
 		p.add(two);
 		size = two.getPreferredSize();
-		two.setBounds(50 + in.left, 370 + in.top, size.width, size.height);
+		two.setBounds(50 + in.left, 390 + in.top, size.width, size.height);
 		
 		p.add(three);
 		size = three.getPreferredSize();
-		three.setBounds(80 + in.left, 370 + in.top, size.width, size.height);
+		three.setBounds(80 + in.left, 390 + in.top, size.width, size.height);
 		
 		p.add(four);
 		size = four.getPreferredSize();
-		four.setBounds(20 + in.left, 390 + in.top, size.width, size.height);
+		four.setBounds(20 + in.left, 410 + in.top, size.width, size.height);
 		
 		p.add(five);
 		size = five.getPreferredSize();
-		five.setBounds(50 + in.left, 390 + in.top, size.width, size.height);
+		five.setBounds(50 + in.left, 410 + in.top, size.width, size.height);
 		
 		p.add(six);
 		size = six.getPreferredSize();
-		six.setBounds(80 + in.left, 390 + in.top, size.width, size.height);
+		six.setBounds(80 + in.left, 410 + in.top, size.width, size.height);
 		
 		DiceChooseAction oneAction = new DiceChooseAction(p, size, in, 1); 
 		DiceChooseAction twoAction = new DiceChooseAction(p, size, in, 2);
@@ -129,7 +136,8 @@ public class menu extends JPanel{
 		diceImage.setIcon(img);
 		p.add(diceImage);
 		size = diceImage.getPreferredSize();
-		diceImage.setBounds(22 + in.left, 260 + in.top, size.width, size.height);
+		diceImage.setBounds(22 + in.left, 270 + in.top, size.width, size.height);
+		
 		
 	}
 	
@@ -213,22 +221,137 @@ public class menu extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
-		
-		System.out.println("Oi");
-		
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		Rectangle2D rect = new Rectangle2D.Double(22 + in.left, 260 + in.top, 300, 300);
+		Rectangle2D rect = new Rectangle2D.Double(12 + in.left, 250 + in.top, 320, 320);
 		
-		g2.draw(rect);
-		
-		g2.setPaint(currentG.getCurrentPlayer().getPlayerColor());
-				
-		g2.fill(rect);	
-		
+		g2.setColor(Color.RED);		
+		g2.fill(rect);
 			
 	}
+	
+	/**
+	 * Defines what dialog appears when a map is loaded
+	 * 
+	 * @return Loaded map's GameMap or <b>null</b>
+	 * @throws MapLoaderException
+	 */
+	public game showLoadMapDialog() throws Exception
+	{
+		JFileChooser chooser = new JFileChooser();
+		//chooser.setCurrentDirectory(new File("./saves"));
+		chooser.setFileFilter(new FileNameExtensionFilter("Apenas .ludosave", "ludosave"));
+		int retorno = chooser.showOpenDialog(null);
+
+		if (retorno == JFileChooser.APPROVE_OPTION)
+		{
+			return gameSave.loadFromFile(chooser.getSelectedFile());
+		}
+
+		return null;
+	}
+	
+	/**
+	 * Defines what happens when the "Carregar Jogo" button is presssed
+	 */
+	private ActionListener loadGameListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			try
+			{
+				game map = showLoadMapDialog();
+				if (map != null)
+				{
+					mainGame = map;
+				}
+			} catch (Exception exception)
+			{
+				//Notifications.getInstance(null).notifyGameLoadingError();
+			}
+		}
+	};
+	
+	/**
+	 * Defines what happens when the "Salvar Jogo" button is presssed
+	 */
+	private ActionListener saveGameListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			try
+			{
+				JFileChooser chooser = new JFileChooser() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = -6647937141202512730L;
+
+					@Override
+					public void approveSelection()
+					{
+						File f = getSelectedFile();
+						if (f.exists() && getDialogType() == SAVE_DIALOG)
+						{							
+							int result = JOptionPane.showConfirmDialog(this,
+									"O arquivo já existe. Deseja sobrescrevê-lo?", "Arquivo já existe",
+									JOptionPane.YES_NO_CANCEL_OPTION);
+							switch (result)
+							{
+								case JOptionPane.YES_OPTION:
+									super.approveSelection();
+									return;
+								case JOptionPane.NO_OPTION:
+									return;
+								case JOptionPane.CLOSED_OPTION:
+									return;
+								case JOptionPane.CANCEL_OPTION:
+									cancelSelection();
+									return;
+							}
+						}
+
+						super.approveSelection();
+					}
+				};
+				
+				chooser.setCurrentDirectory(new File("./saves"));
+				chooser.setFileFilter(new FileNameExtensionFilter(".ludosave", "ludosave"));
+				int ret = chooser.showSaveDialog(null);
+
+				if (ret == JFileChooser.APPROVE_OPTION)
+				{
+					File file = chooser.getSelectedFile();
+
+					if (utils.getFileExtension(file.getName()).equalsIgnoreCase("ludosave"))
+					{
+						// filename is OK as-is
+					}
+					else
+					{
+						// append .ludosave
+						file = new File(file.toString() + ".ludosave");
+
+						file = new File(file.getParentFile(), utils.getFileBaseName(file.getName()) + ".ludosave");
+					}
+
+					try
+					{
+						gameSave.saveToFile(mainGame, file);
+					} catch (IOException ex)
+					{
+						//Notifications.getInstance(null).notifyError(ex.getMessage());
+						ex.printStackTrace();
+					}
+				}
+
+			} catch (Exception ex)
+			{
+				ex.printStackTrace();
+			}
+		}
+	};
 }
 
 
