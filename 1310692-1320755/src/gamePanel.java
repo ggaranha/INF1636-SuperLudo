@@ -17,7 +17,7 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class gamePanel extends JPanel implements Observer{
+public class gamePanel extends JPanel{
 	
 	/**
 	 * 
@@ -43,8 +43,6 @@ public class gamePanel extends JPanel implements Observer{
 		setForeground(Color.white);
 
 		mainGame = g;
-		mainGame.addObserver(this);
-		
 		menuGame = m;
 
 		this.addMouseListener(new boardMouseListener(notifications.getInstance(mainGame)));
@@ -175,12 +173,6 @@ public class gamePanel extends JPanel implements Observer{
 		} catch (Exception e) {
 			notifications.getInstance(null).notifyError(e.getMessage());
 		}
-	}
-	
-
-	@Override
-	public void update(Observable o, Object arg) {
-		refresh();
 	}
 
 }

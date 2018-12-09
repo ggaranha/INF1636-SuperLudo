@@ -9,17 +9,48 @@ public class displayPawns {
 		int i, j;
 		tile refTile;
 		
-		for(i=0;i<4;i++)
+		for(i=0;i<15;i++)
 		{
-			for(j=0;j<4;j++)
+			for(j=0;j<15;j++)
 			{
-				g2d.setColor(p[i].getPlayerColor());
-				refTile = p[i].getPlayerPawn(j).getPawnTile();
-				g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 7.5, refTile.getCoordY() + 7.5, 15, 15));
-				g2d.setColor(Color.BLACK);
-				g2d.draw(new Ellipse2D.Double(refTile.getCoordX() + 7.5, refTile.getCoordY() + 7.5, 15, 15));
+				refTile = b.getTile(i, j);
+				
+				if(refTile.isTileEmpty())
+				{
+					continue;
+				}
+				
+				if(refTile.getTilePawnCount() == 1)
+				{
+					g2d.setColor(refTile.getTileSinglePawn().getPawnColor());
+					g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 7.5, refTile.getCoordY() + 7.5, 15, 15));
+					g2d.setColor(Color.BLACK);
+					g2d.draw(new Ellipse2D.Double(refTile.getCoordX() + 7.5, refTile.getCoordY() + 7.5, 15, 15));
+				}
+				
+				else if(refTile.getPawnsColors().size() == 1)
+				{
+					g2d.setColor(refTile.getPawnsColors().get(0));
+					g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 2.0, refTile.getCoordY() + 2.0, 26, 26));
+					g2d.setColor(Color.WHITE);
+					g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 4.0, refTile.getCoordY() + 4.0, 22, 22));
+					g2d.setColor(refTile.getPawnsColors().get(0));
+					g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 7.5, refTile.getCoordY() + 7.5, 15, 15));
+					g2d.setColor(Color.BLACK);
+					g2d.draw(new Ellipse2D.Double(refTile.getCoordX() + 2.0, refTile.getCoordY() + 2.0, 26, 26));
+					
+				}
+				else
+				{
+					g2d.setColor(refTile.getPawnsColors().get(1));
+					g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 4.0, refTile.getCoordY() + 4.0, 22, 22));
+					g2d.setColor(refTile.getPawnsColors().get(0));
+					g2d.fill(new Ellipse2D.Double(refTile.getCoordX() + 7.5, refTile.getCoordY() + 7.5, 15, 15));
+					g2d.setColor(Color.BLACK);
+					g2d.draw(new Ellipse2D.Double(refTile.getCoordX() + 4.0, refTile.getCoordY() + 4.0, 22, 22));
+				}
 			}
-		}
+		}		
 	}
 
 }

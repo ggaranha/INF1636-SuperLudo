@@ -51,6 +51,24 @@ public class player {
 		return false;
 	}
 	
+	public pawn getPawnOnBeginTile()
+	{
+		if(playerExitTile.isTileEmpty())
+		{
+			return null;
+		}
+		
+		for(int i=0; i<4; i++)
+		{
+			if(this.isPlayerBeginTile(this.getPlayerPawn(i).getPawnTile()))
+			{
+				return this.getPlayerPawn(i);
+			}
+		}
+		
+		return null;
+	}
+	
 	public pawn getPlayerPawn(int n)
 	{
 		return playerPawn[n];

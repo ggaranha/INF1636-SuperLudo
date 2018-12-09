@@ -102,6 +102,22 @@ public class tile {
 		return null;
 	}
 	
+	public pawn removeTilePawn(pawn p)
+	{
+		for (int i = 0; i < tilePawns.size(); i++)
+		{
+			pawn pawnRef = tilePawns.get(i);
+
+			if (pawnRef == p)
+			{
+				tilePawns.remove(pawnRef);
+				return pawnRef;
+			}
+		}
+		
+		return null;
+	}
+	
 	public int getPawnCountByColor(Color c)
 	{
 		int count = 0;
@@ -117,6 +133,15 @@ public class tile {
 		return count;
 	}
 	
+	public pawn getTileSinglePawn()
+	{
+		if(tilePawns.size() == 1)
+		{
+			return tilePawns.get(0);
+		}
+		
+		return null;
+	}
 	
 	public int getTilePawnCount()
 	{
