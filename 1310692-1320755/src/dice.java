@@ -9,20 +9,30 @@ public class dice{
 	
 	private int consecutive6 = 0;
 	
+	private boolean enable = true;
+	
 	public dice()
 	{
 		valueDice = 1;
+	}
+		
+	public void setEnable(boolean e) {
+		enable = e;
+	}
+	
+	public boolean isEnable() {
+		return enable;
 	}
 	
 	public void setValueDice(int i)
 	{
 		if(i>0 || i<7)
 		{
-			valueDice=1;
+			valueDice=i;
 		}
 		else
 		{
-			valueDice = i;
+			valueDice = 1;
 		}
 	}
 	

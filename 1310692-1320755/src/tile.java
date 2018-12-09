@@ -86,7 +86,7 @@ public class tile {
 		p.setPawnTile(this);
 	}
 	
-	public void removeTilePawn(Color c)
+	public pawn removeTilePawn(Color c)
 	{
 		for (int i = 0; i < tilePawns.size(); i++)
 		{
@@ -95,9 +95,11 @@ public class tile {
 			if (pawnRef.getPawnColor() == c)
 			{
 				tilePawns.remove(pawnRef);
-				break;
+				return pawnRef;
 			}
 		}
+		
+		return null;
 	}
 	
 	public int getPawnCountByColor(Color c)

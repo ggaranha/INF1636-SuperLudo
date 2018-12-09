@@ -28,10 +28,12 @@ public class gamePanel extends JPanel implements Observer{
 	
 	private game mainGame;
 	
+	private menu menuGame;
+	
 	private tile refTile;
 	private pawn refPawn;
 	
-	public gamePanel(game g)
+	public gamePanel(game g, menu m)
 	{
 		super();
 		
@@ -42,6 +44,8 @@ public class gamePanel extends JPanel implements Observer{
 
 		mainGame = g;
 		mainGame.addObserver(this);
+		
+		menuGame = m;
 
 		this.addMouseListener(new boardMouseListener(notifications.getInstance(mainGame)));
 	}
@@ -77,6 +81,59 @@ public class gamePanel extends JPanel implements Observer{
 		@Override
 		public void mouseClicked(MouseEvent e)
 		{
+			int x = (int) (e.getX() / 30);
+			int y = (int) (e.getY() / 30);
+
+			try {
+				refTile = mainGame.getGameBoard().getTile(x, y);
+				
+				System.out.printf("x: %d, y: %d \n", refTile.getPosX(), refTile.getPosY());
+				
+				
+				if(!refTile.isTileEmpty() && !mainGame.getGameDice().isEnable()) {
+					
+					refPawn = refTile.removeTilePawn(mainGame.getCurrentPlayer().getPlayerColor());
+					
+					System.out.printf("Pawn: x: %d, y: %d, Qtd Walk: %d \n", refPawn.getPawnTile().getPosX(), refPawn.getPawnTile().getPosY(), refPawn.getPawnWalkCount());
+							
+					refPawn.setPawnWalkCount(refPawn.getPawnWalkCount() + mainGame.getGameDice().getValueDice());
+					
+					System.out.printf("Dice: %d, New Qtd Walk: %d \n", mainGame.getGameDice().getValueDice(), refPawn.getPawnWalkCount());
+					
+					int pawnX = 0;
+					int pawnY = 0;
+					
+					if(refPawn.getPawnColor() == Color.RED) {
+						pawnX = refPawn.redPawnXPath[refPawn.getPawnWalkCount()];
+						pawnY = refPawn.redPawnYPath[refPawn.getPawnWalkCount()];
+					}else if(refPawn.getPawnColor() == Color.GREEN) {
+						pawnX = refPawn.greenPawnXPath[refPawn.getPawnWalkCount()];
+						pawnY = refPawn.greenPawnYPath[refPawn.getPawnWalkCount()];
+					}else if(refPawn.getPawnColor() == Color.YELLOW) {
+						pawnX = refPawn.yellowPawnXPath[refPawn.getPawnWalkCount()];
+						pawnY = refPawn.yellowPawnYPath[refPawn.getPawnWalkCount()];
+					}else if(refPawn.getPawnColor() == Color.BLUE) {
+						pawnX = refPawn.bluePawnXPath[refPawn.getPawnWalkCount()];
+						pawnY = refPawn.bluePawnYPath[refPawn.getPawnWalkCount()];
+					}
+					
+				
+					tile newTilePawn = mainGame.getGameBoard().getTile(pawnX, pawnY);
+					newTilePawn.addTilePawn(refPawn);
+					refPawn.setPawnTile(newTilePawn);
+					
+					menuGame.setDiceEnable(true);
+					
+					mainGame.nextPlayer();
+					
+					System.out.printf("New Tile: Tile: x: %d, y: %d  /  Pawn: x: %d, y: %d \n", newTilePawn.getPosX(), newTilePawn.getPosY(), refPawn.getPawnTile().getPosX(), refPawn.getPawnTile().getPosY());
+				}
+				
+			} catch (Exception ex) {
+
+			}
+			
+			refresh();
 			
 		}
 
@@ -101,17 +158,7 @@ public class gamePanel extends JPanel implements Observer{
 		@Override
 		public void mouseReleased(MouseEvent e)
 		{
-			int x = (int) (e.getX() / 30);
-			int y = (int) (e.getY() / 30);
-
-			try {
-				refTile = mainGame.getGameBoard().getTile(x, y);
-				
-			} catch (Exception ex) {
-
-			}
 			
-			refresh();
 		}
 	}
 	

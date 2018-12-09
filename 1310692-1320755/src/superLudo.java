@@ -27,7 +27,10 @@ public class superLudo extends JFrame{
 		public void actionPerformed(ActionEvent arg0)
 		{
 			superLudoGame = new game();
-			gPanel = new gamePanel(superLudoGame);
+			menuPanel = new JPanel();
+			menuPanel.setLayout(null);
+			gameMenu = new menu(menuPanel, superLudoGame);
+			gPanel = new gamePanel(superLudoGame, gameMenu);
 			boardPanel.add(gPanel);
 		}
 	};
@@ -42,11 +45,12 @@ public class superLudo extends JFrame{
 		boardPanel.setLayout(new BorderLayout());
 		boardPanel.setBackground(Color.WHITE);
 		superLudoGame = new game();
-		gPanel = new gamePanel(superLudoGame);
-		boardPanel.add(gPanel);
 		menuPanel = new JPanel();
 		menuPanel.setLayout(null);
 		gameMenu = new menu(menuPanel, superLudoGame);
+		gPanel = new gamePanel(superLudoGame, gameMenu);
+		boardPanel.add(gPanel);
+		
 		
 		gameMenu.newGameMenu.addActionListener(newGameListener);
 		

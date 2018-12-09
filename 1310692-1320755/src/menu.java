@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
@@ -7,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.EventListener;
+import java.util.EventObject;
 
 
 public class menu extends JPanel{
@@ -25,6 +29,12 @@ public class menu extends JPanel{
 	public ButtonGroup diceOptions;
 	public Insets in;
 	public game mainGame;
+	public JRadioButton one = new JRadioButton("1", false);
+	public JRadioButton two = new JRadioButton("2", false);
+	public JRadioButton three = new JRadioButton("3", false);
+	public JRadioButton four = new JRadioButton("4", false);
+	public JRadioButton five = new JRadioButton("5", false);
+	public JRadioButton six = new JRadioButton("6", false);
 	
 	
 	public menu(JPanel p, game currentGame)
@@ -61,10 +71,10 @@ public class menu extends JPanel{
 		p.add(throwDiceMenu);
 		size = throwDiceMenu.getPreferredSize();
 		throwDiceMenu.setBounds(20 + in.left, 225 + in.top, size.width, size.height);
-		
+			
 		DiceRollAction throwAction = new DiceRollAction(p, size, in);
 		throwDiceMenu.addActionListener(throwAction);
-		
+			
 		diceManual(p, size, in);
 		
 	}
@@ -72,14 +82,7 @@ public class menu extends JPanel{
 	public void diceManual(JPanel p, Dimension size, Insets in) {
 		diceImage = new JLabel();
 		
-		diceOptions =  new ButtonGroup();
-		
-		JRadioButton one = new JRadioButton("1", false);
-		JRadioButton two = new JRadioButton("2", false);
-		JRadioButton three = new JRadioButton("3", false);
-		JRadioButton four = new JRadioButton("4", false);
-		JRadioButton five = new JRadioButton("5", false);
-		JRadioButton six = new JRadioButton("6", false);	
+		diceOptions =  new ButtonGroup();		
 		
 		diceOptions.add(one);
 		diceOptions.add(two);
@@ -141,9 +144,27 @@ public class menu extends JPanel{
 		
 	}
 	
-	public String setDiceName(int number) {
+	public void setDiceEnable(boolean e) {
+		
+		throwDiceMenu.setEnabled(e);
+		one.setEnabled(e);
+		two.setEnabled(e);
+		three.setEnabled(e);
+		four.setEnabled(e);
+		five.setEnabled(e);
+		six.setEnabled(e);
+		
+		mainGame.getGameDice().setEnable(e);
+	}
+	
+	public String setDice(int number) {
 		
 		String name = "";
+		
+		mainGame.getGameDice().setValueDice(number);
+		setDiceEnable(false);
+		
+		System.out.printf("Dice: enable: %b", mainGame.getGameDice().isEnable());
 		
 		switch(number) {
 		
@@ -189,7 +210,7 @@ public class menu extends JPanel{
 			
 			diceNumber = (int) (Math.random() * 6) + 1;
 			
-			paintDice(setDiceName(diceNumber), jp, dsize, ins);
+			paintDice(setDice(diceNumber), jp, dsize, ins);
 			
 			repaint();
 		}
@@ -210,8 +231,8 @@ public class menu extends JPanel{
 		}
 		
 		public void actionPerformed(ActionEvent event) {
-			
-			paintDice(setDiceName(dNumber), jp, dsize, ins);
+						
+			paintDice(setDice(dNumber), jp, dsize, ins);
 			
 			repaint();
 		}
