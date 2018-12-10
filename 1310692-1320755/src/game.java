@@ -41,6 +41,31 @@ public class game extends Observable{
 		gamePlayers[3] = new player("Azul", Color.BLUE, gameBoard, gameBoard.getTile(6, 13), 0, 9);
 		
 		currentPlayer = gamePlayers[0];
+		
+		int pawnX = 0;
+		int pawnY = 0;
+		
+		pawn p = currentPlayer.getPlayerPawn(0);
+		
+		if(currentPlayer.getPlayerColor() == Color.RED) {
+			pawnX = p.redPawnXPath[1];
+			pawnY = p.redPawnYPath[1];
+		}else if(currentPlayer.getPlayerColor() == Color.GREEN) {
+			pawnX = p.greenPawnXPath[1];
+			pawnY = p.greenPawnYPath[1];
+		}else if(currentPlayer.getPlayerColor() == Color.YELLOW) {
+			pawnX = p.yellowPawnXPath[1];
+			pawnY = p.yellowPawnYPath[1];
+		}else if(currentPlayer.getPlayerColor() == Color.BLUE) {
+			pawnX = p.bluePawnXPath[1];
+			pawnY = p.bluePawnYPath[1];
+		}
+		
+		p.setPawnWalkCount(1);
+		
+		p.getPawnTile().removeTilePawn(p);
+		gameBoard.getTile(pawnX, pawnY).addTilePawn(p);
+		currentPlayer.playerStarted();
 	}
 	
 	public board getGameBoard()

@@ -7,6 +7,7 @@ public class player {
 	private pawn[] playerPawn;
 	private tile playerExitTile;
 	private tile[] playerPawnBeginTile;
+	private boolean playerStart = false;
 	
 	public player(String name, Color c, board b, tile exitTile, int x, int y)
 	{
@@ -28,6 +29,14 @@ public class player {
 		playerPawn[3] = new pawn(playerColor, this, b.getTile(x + 4, y + 4));
 		playerPawnBeginTile[3] = b.getTile(x + 4, y + 4);
 		b.getTile(x + 4, y + 4).addTilePawn(playerPawn[3]);
+	}
+	
+	public boolean isPlayerStart() {
+		return playerStart;
+	}
+	
+	public void playerStarted() {
+		playerStart = true;
 	}
 	
 	public boolean isPlayerPawn(pawn p)

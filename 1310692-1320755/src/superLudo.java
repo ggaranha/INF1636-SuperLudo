@@ -18,7 +18,7 @@ public class superLudo extends JFrame{
 	private JPanel boardPanel;
 	private gamePanel gPanel;
 	private JPanel menuPanel;
-	private game superLudoGame;
+	private static game superLudoGame;
 	private gameControl gc;
 	private menu gameMenu;
 	
