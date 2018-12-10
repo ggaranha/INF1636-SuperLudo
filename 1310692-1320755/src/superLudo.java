@@ -18,8 +18,12 @@ public class superLudo extends JFrame{
 	private JPanel boardPanel;
 	private gamePanel gPanel;
 	private JPanel menuPanel;
+<<<<<<< HEAD
 	private static game superLudoGame;
 	private gameControl gc;
+=======
+	private game superLudoGame;
+>>>>>>> branch 'master' of https://github.com/ggaranha/INF1636-SuperLudo.git
 	private menu gameMenu;
 	
 	private ActionListener newGameListener = new ActionListener() {

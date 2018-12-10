@@ -45,7 +45,7 @@ public class gamePanel extends JPanel{
 		mainGame = g;
 		menuGame = m;
 
-		this.addMouseListener(new boardMouseListener(notifications.getInstance(mainGame)));
+		this.addMouseListener(new boardMouseListener());
 	}
 	
 	public void paintComponent(Graphics g)
@@ -71,7 +71,7 @@ public class gamePanel extends JPanel{
 	private class boardMouseListener implements MouseListener {
 		
 		
-		public boardMouseListener(notificationsManager nManager)
+		public boardMouseListener()
 		{
 			
 		}
@@ -221,7 +221,6 @@ public class gamePanel extends JPanel{
 				throw new Exception("Erro ao renderizar mapa");
 			}
 		} catch (Exception e) {
-			notifications.getInstance(null).notifyError(e.getMessage());
 		}
 	}
 
