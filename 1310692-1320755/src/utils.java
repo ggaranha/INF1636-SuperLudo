@@ -63,21 +63,4 @@ public class utils {
 			return "";
 		}
 	}
-
-	public static ArrayList<Entry<?, Integer>> sortHashtableByIntegerValue(Hashtable<?, Integer> t)
-	{
-
-		// Transfer as List and sort it
-		ArrayList<java.util.Map.Entry<?, Integer>> l = new ArrayList<Entry<?, Integer>>(t.entrySet());
-		Collections.sort(l, new java.util.Comparator<java.util.Map.Entry<?, Integer>>() {
-
-			public int compare(java.util.Map.Entry<?, Integer> o1, java.util.Map.Entry<?, Integer> o2)
-			{
-				return o1.getValue().compareTo(o2.getValue());
-			}
-		});
-
-		return l;
-	}
-
 }

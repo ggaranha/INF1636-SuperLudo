@@ -11,9 +11,6 @@ public class game extends Observable{
 	private player gamePlayers[];
 	private player currentPlayer;
 	
-	private action currentAction;
-	
-	
 	public game()
 	{
 		resetGame();
@@ -113,16 +110,6 @@ public class game extends Observable{
 		
 		return -1;
 		
-	}
-	
-	public action getCurrentAction() 
-	{
-		return currentAction;
-	}
-
-	public void setCurrentAction(action ca) 
-	{
-		currentAction = ca;
 	}
 	
 	public void setChanged()
