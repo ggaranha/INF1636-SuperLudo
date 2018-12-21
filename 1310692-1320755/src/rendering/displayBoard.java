@@ -1,12 +1,19 @@
+package rendering;
 import java.awt.*;
 import java.awt.geom.*;
 
+import gameInfo.tile;
+import gameInfo.board;
+import mainGame.game;
+
 public class displayBoard{
 	
-	public static void paintBoard(Graphics2D g2d, board b)
+	public static void paintBoard(Graphics2D g2d, game g)
 	{
 		int i,j;
 		tile refTile;
+		board b = g.getGameBoard();
+		
 		for(i=0;i<15;i++)
 		{
 			for(j=0;j<15;j++)

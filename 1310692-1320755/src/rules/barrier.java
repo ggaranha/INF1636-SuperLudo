@@ -1,3 +1,9 @@
+package rules;
+
+import gameInfo.tile;
+import gameInfo.player;
+import gameInfo.board;
+
 public class barrier {
 	
 	public static boolean opponentHasBarrierAt(player currentPlayer, board b, int x, int y)

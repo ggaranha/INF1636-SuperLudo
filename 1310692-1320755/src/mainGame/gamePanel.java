@@ -1,3 +1,4 @@
+package mainGame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,6 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+
+import gameInfo.tile;
+import gameInfo.pawn;
+import gameInfo.player;
+
+import rendering.displayBoard;
+import rendering.displayPawns;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -55,9 +63,8 @@ public class gamePanel extends JPanel{
 		
 		g2d.setBackground(Color.WHITE);
 		
-		displayBoard.paintBoard(g2d, mainGame.getGameBoard());
-		
-		displayPawns.paintPawns(g2d, mainGame.getGameBoard(), mainGame.getGamePlayers());
+		displayBoard.paintBoard(g2d, mainGame);	
+		displayPawns.paintPawns(g2d, mainGame);
 		
 		if(refTile != null)
 		{

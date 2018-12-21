@@ -1,3 +1,4 @@
+package gameInfo;
 import java.net.URL;
 import java.applet.*;
 import java.awt.Graphics;

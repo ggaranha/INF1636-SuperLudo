@@ -1,7 +1,10 @@
+package mainGame;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import utilities.utils;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

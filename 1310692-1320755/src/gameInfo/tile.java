@@ -1,3 +1,4 @@
+package gameInfo;
 import java.awt.Color;
 import java.util.*;
 

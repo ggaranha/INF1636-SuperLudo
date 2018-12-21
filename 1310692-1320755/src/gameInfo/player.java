@@ -1,3 +1,4 @@
+package gameInfo;
 import java.awt.Color;
 
 public class player {

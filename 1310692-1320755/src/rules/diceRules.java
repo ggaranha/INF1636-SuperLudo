@@ -1,3 +1,9 @@
+package rules;
+
+import mainGame.game;
+import gameInfo.dice;
+import gameInfo.tile;
+import gameInfo.pawn;
 
 public class diceRules {
 	

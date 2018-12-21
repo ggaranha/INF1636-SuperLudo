@@ -1,9 +1,16 @@
+package mainGame;
 import java.io.File;
 import java.awt.*;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import gameInfo.board;
+import gameInfo.dice;
+import gameInfo.pawn;
+import gameInfo.player;
+import gameInfo.tile;
 
 public class gameSave {
 	

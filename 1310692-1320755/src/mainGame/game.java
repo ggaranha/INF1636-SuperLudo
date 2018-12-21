@@ -1,5 +1,11 @@
+package mainGame;
 import java.awt.Color;
 import java.util.Observable;
+
+import gameInfo.board;
+import gameInfo.dice;
+import gameInfo.pawn;
+import gameInfo.player;
 
 public class game extends Observable{
 	/**

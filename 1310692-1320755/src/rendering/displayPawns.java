@@ -1,13 +1,21 @@
+package rendering;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.*;
 
+import gameInfo.tile;
+import gameInfo.board;
+
+import mainGame.game;
+
 public class displayPawns {
 	
-	public static void paintPawns(Graphics2D g2d, board b, player[] p)
+	public static void paintPawns(Graphics2D g2d, game g)
 	{
 		int i, j;
 		tile refTile;
+		
+		board b=g.getGameBoard();
 		
 		for(i=0;i<15;i++)
 		{
