@@ -14,7 +14,6 @@ import gameInfo.tile;
 
 public class gameSave {
 	
-	// TODO - Add support to saving/loading during bonus actions (+10 / +20 after entering pocket and capturing opponent)
 		public static game loadFromFile(File file) throws Exception
 		{
 			Scanner scannerFile = new Scanner(file);
@@ -132,9 +131,16 @@ public class gameSave {
 				}
 
 				line++;
-				parser = saveFile[line];
+				if(saveFile.length>line)
+				{
+					parser = saveFile[line];
+				}
+				else
+				{
+					parser = "END OF FILE";
+				}
+				
 			}
-			parser = "END OF FILE";
 
 			gameDice.setValueDice(currentDice);
 			gameDice.setConsecutive6(consecutive6);

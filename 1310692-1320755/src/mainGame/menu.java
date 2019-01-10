@@ -165,6 +165,14 @@ public class menu extends JPanel{
 		String name = "";
 		
 		mainGame.getGameDice().setValueDice(number);
+		if(number == 6)
+		{
+			mainGame.getGameDice().setConsecutive6(mainGame.getGameDice().getConsecutive6() + 1);
+		}
+		else
+		{
+			mainGame.getGameDice().setConsecutive6(0);
+		}
 		setDiceEnable(false);
 		
 		System.out.printf("Dice: enable: %b", mainGame.getGameDice().isEnable());
@@ -212,6 +220,11 @@ public class menu extends JPanel{
 			diceOptions.clearSelection();
 			
 			diceNumber = (int) (Math.random() * 6) + 1;
+			
+			if(diceNumber == 6)
+			{
+				
+			}
 			
 			paintDice(setDice(diceNumber), jp, dsize, ins);
 			

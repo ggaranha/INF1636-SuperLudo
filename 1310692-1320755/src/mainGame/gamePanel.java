@@ -25,7 +25,7 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class gamePanel extends JPanel{
+public class gamePanel extends JPanel implements Observer{
 	
 	/**
 	 * 
@@ -35,9 +35,7 @@ public class gamePanel extends JPanel{
 	private static gamePanel instance = null;
 	
 	private game mainGame;
-	
 	private menu menuGame;
-	
 	private tile refTile;
 	private pawn refPawn;
 	
@@ -52,7 +50,8 @@ public class gamePanel extends JPanel{
 
 		mainGame = g;
 		menuGame = m;
-
+		
+		mainGame.addObserver(this);
 		this.addMouseListener(new boardMouseListener());
 	}
 	
@@ -144,11 +143,12 @@ public class gamePanel extends JPanel{
 						tile newTilePawn = mainGame.getGameBoard().getTile(pawnX, pawnY);
 						newTilePawn.addTilePawn(refPawn);
 						refPawn.setPawnTile(newTilePawn);
-						
+						if(mainGame.getGameDice().getValueDice() != 6 || mainGame.getGameDice().getConsecutive6() == 3)
+						{
+							mainGame.getGameDice().setConsecutive6(0);
+							mainGame.nextPlayer();
+						}
 						menuGame.setDiceEnable(true);
-						
-						mainGame.nextPlayer();
-						
 						player play = mainGame.getCurrentPlayer();
 						
 						if(!play.isPlayerStart()) {
@@ -230,5 +230,9 @@ public class gamePanel extends JPanel{
 		} catch (Exception e) {
 		}
 	}
-
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		refresh();
+	}
 }
