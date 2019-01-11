@@ -1,7 +1,5 @@
 package mainGame;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.utils;
@@ -12,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.util.EventListener;
-import java.util.EventObject;
 
 
 public class menu extends JPanel{
@@ -21,6 +17,7 @@ public class menu extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 9195280542628481358L;
+	private static menu instance;
 	
 	public JButton newGameMenu;
 	public JButton loadGameMenu;
@@ -43,6 +40,8 @@ public class menu extends JPanel{
 	public menu(JPanel p, game currentGame)
 	{
 		super();
+		
+		instance = this;
 		
 		Dimension size;
 		in = p.getInsets();
@@ -75,7 +74,7 @@ public class menu extends JPanel{
 		size = throwDiceMenu.getPreferredSize();
 		throwDiceMenu.setBounds(20 + in.left, 225 + in.top, size.width, size.height);
 			
-		DiceRollAction throwAction = new DiceRollAction(p, size, in);
+		diceRollAction throwAction = diceRollAction.getInstance(p, size, in, instance);
 		throwDiceMenu.addActionListener(throwAction);
 			
 		diceManual(p, size, in);
@@ -118,12 +117,12 @@ public class menu extends JPanel{
 		size = six.getPreferredSize();
 		six.setBounds(80 + in.left, 410 + in.top, size.width, size.height);
 		
-		DiceChooseAction oneAction = new DiceChooseAction(p, size, in, 1); 
-		DiceChooseAction twoAction = new DiceChooseAction(p, size, in, 2);
-		DiceChooseAction threeAction = new DiceChooseAction(p, size, in, 3);
-		DiceChooseAction fourAction = new DiceChooseAction(p, size, in, 4);
-		DiceChooseAction fiveAction = new DiceChooseAction(p, size, in, 5);
-		DiceChooseAction sixAction = new DiceChooseAction(p, size, in, 6);
+		diceChooseAction oneAction = new diceChooseAction(p, size, in, 1, instance); 
+		diceChooseAction twoAction = new diceChooseAction(p, size, in, 2, instance);
+		diceChooseAction threeAction = new diceChooseAction(p, size, in, 3, instance);
+		diceChooseAction fourAction = new diceChooseAction(p, size, in, 4, instance);
+		diceChooseAction fiveAction = new diceChooseAction(p, size, in, 5, instance);
+		diceChooseAction sixAction = new diceChooseAction(p, size, in, 6, instance);
 		
 		one.addActionListener(oneAction);
 		two.addActionListener(twoAction);
@@ -143,7 +142,6 @@ public class menu extends JPanel{
 		p.add(diceImage);
 		size = diceImage.getPreferredSize();
 		diceImage.setBounds(22 + in.left, 270 + in.top, size.width, size.height);
-		
 		
 	}
 	
@@ -200,61 +198,6 @@ public class menu extends JPanel{
 		}
 		
 		return name;		
-	}
-	
-	
-	private class DiceRollAction implements ActionListener{
-		
-		public JPanel jp;
-		public Dimension dsize;
-		public Insets ins;
-		
-		public DiceRollAction(JPanel p, Dimension size, Insets in) {
-			jp = p;
-			dsize = size;
-			ins = in;
-		}
-		
-		public void actionPerformed(ActionEvent event) {
-			
-			diceOptions.clearSelection();
-			
-			diceNumber = (int) (Math.random() * 6) + 1;
-			
-			if(diceNumber == 6)
-			{
-				
-			}
-			
-			paintDice(setDice(diceNumber), jp, dsize, ins);
-			
-			repaint();
-		}
-
-	}
-	
-	private class DiceChooseAction implements ActionListener{
-		
-		public JPanel jp;
-		public Dimension dsize;
-		public Insets ins;
-		
-		public DiceChooseAction(JPanel p, Dimension size, Insets in, int number) {
-			jp = p;
-			dsize = size;
-			ins = in;
-			dNumber = number;
-		}
-		
-		public void actionPerformed(ActionEvent event) {
-						
-			paintDice(setDice(dNumber), jp, dsize, ins);
-			
-			repaint();
-		}
-		
-		private int dNumber;
-
 	}
 	
 	public void paintComponent(Graphics g) {
