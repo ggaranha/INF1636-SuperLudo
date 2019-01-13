@@ -1,29 +1,31 @@
-package mainGame;
+package rules;
 import java.awt.Color;
 import java.util.Observable;
 
 import gameInfo.board;
 import gameInfo.dice;
-import gameInfo.pawn;
 import gameInfo.player;
 
 public class game extends Observable{
 	/**
 	 * 
 	 */
-
+	private static game instance;
+	
 	private board gameBoard;
 	private dice gameDice;
 	private player gamePlayers[];
 	private player currentPlayer;
 	
-	public game()
+	private game()
 	{
 		resetGame();
 	}
 	
 	public game(board b, player[] gp, dice d, int pIndex)
 	{
+		instance = this;
+		
 		gameBoard = b;
 		gameDice = d;
 		
@@ -32,10 +34,22 @@ public class game extends Observable{
 		currentPlayer = gamePlayers[pIndex];
 	}
 	
+	public static game getInstance() {
+		if(instance == null) {
+			instance = new game();
+		}
+		
+		return instance;
+	}
+	
+	public static void setInstanceNull() {
+		instance = null;
+	}
+	
 	public void resetGame()
 	{
 		gameBoard = new board();
-		gameDice = new dice();
+		gameDice = dice.getInstance();
 		
 		gamePlayers = new player[4];
 		gamePlayers[0] = new player("Vermelho", Color.RED, gameBoard, gameBoard.getTile(1, 6), 0, 0);
@@ -45,30 +59,7 @@ public class game extends Observable{
 		
 		currentPlayer = gamePlayers[0];
 		
-		int pawnX = 0;
-		int pawnY = 0;
-		
-		pawn p = currentPlayer.getPlayerPawn(0);
-		
-		if(currentPlayer.getPlayerColor() == Color.RED) {
-			pawnX = p.redPawnXPath[1];
-			pawnY = p.redPawnYPath[1];
-		}else if(currentPlayer.getPlayerColor() == Color.GREEN) {
-			pawnX = p.greenPawnXPath[1];
-			pawnY = p.greenPawnYPath[1];
-		}else if(currentPlayer.getPlayerColor() == Color.YELLOW) {
-			pawnX = p.yellowPawnXPath[1];
-			pawnY = p.yellowPawnYPath[1];
-		}else if(currentPlayer.getPlayerColor() == Color.BLUE) {
-			pawnX = p.bluePawnXPath[1];
-			pawnY = p.bluePawnYPath[1];
-		}
-		
-		p.setPawnWalkCount(1);
-		
-		p.getPawnTile().removeTilePawn(p);
-		gameBoard.getTile(pawnX, pawnY).addTilePawn(p);
-		currentPlayer.playerStarted();
+		facade.getInstance().firstStartPlayer(currentPlayer);
 	}
 	
 	public board getGameBoard()

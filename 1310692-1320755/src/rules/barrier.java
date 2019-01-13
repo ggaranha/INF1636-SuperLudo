@@ -3,8 +3,56 @@ package rules;
 import gameInfo.tile;
 import gameInfo.player;
 import gameInfo.board;
+import gameInfo.pawn;
+
+import java.awt.Color;
+import java.util.List;
 
 public class barrier {
+	
+	public barrier() {
+		
+	}
+	
+	public static boolean hasBarrierOnTheWay(pawn pawn, int inicio, int fim){
+		game mainGame = game.getInstance();
+		int pawnXPath[] = null;
+		int pawnYPath[] = null;
+		
+		if(pawn.getPawnColor() == Color.RED) {
+			pawnXPath = pawn.redPawnXPath;
+			pawnYPath = pawn.redPawnYPath;
+		}else if(pawn.getPawnColor() == Color.GREEN) {
+			pawnXPath = pawn.greenPawnXPath;
+			pawnYPath = pawn.greenPawnYPath;
+		}else if(pawn.getPawnColor() == Color.BLUE) {
+			pawnXPath = pawn.bluePawnXPath;
+			pawnYPath = pawn.bluePawnYPath;
+		}else if(pawn.getPawnColor() == Color.YELLOW) {
+			pawnXPath = pawn.yellowPawnXPath;
+			pawnYPath = pawn.yellowPawnYPath;
+		}
+		
+		if(inicio == 0) {
+			inicio++;
+		}
+		
+		for(int i = inicio; i <= fim; i++) {
+			tile tRef = mainGame.getGameBoard().getTile(pawnXPath[i], pawnYPath[i]);
+			
+			if(tRef != null) {
+				List<Color> colors = tRef.getPawnsColors();
+				
+				for(Color c : colors){
+					if(tRef.getPawnCountByColor(c) > 1) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
 	
 	public static boolean opponentHasBarrierAt(player currentPlayer, board b, int x, int y)
 	{

@@ -3,7 +3,6 @@ import java.awt.Color;
 
 public class player {
 	
-	private String playerName;
 	private Color playerColor;
 	private pawn[] playerPawn;
 	private tile playerExitTile;
@@ -12,7 +11,6 @@ public class player {
 	
 	public player(String name, Color c, board b, tile exitTile, int x, int y)
 	{
-		playerName = name;
 		playerColor = c;
 		playerExitTile = exitTile;
 		playerPawn = new pawn[4];
@@ -62,12 +60,7 @@ public class player {
 	}
 	
 	public pawn getPawnOnBeginTile()
-	{
-		if(playerExitTile.isTileEmpty())
-		{
-			return null;
-		}
-		
+	{		
 		for(int i=0; i<4; i++)
 		{
 			if(this.isPlayerBeginTile(this.getPlayerPawn(i).getPawnTile()))
@@ -77,6 +70,21 @@ public class player {
 		}
 		
 		return null;
+	}
+	
+	public int getNumberPawnOnBeginTile() {
+		
+		int number = 0;
+		
+		for(int i=0; i<4; i++)
+		{
+			if(this.isPlayerBeginTile(this.getPlayerPawn(i).getPawnTile()))
+			{
+				number++;
+			}
+		}
+		
+		return number;
 	}
 	
 	public pawn getPlayerPawn(int n)

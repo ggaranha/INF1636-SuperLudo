@@ -3,8 +3,8 @@ import java.awt.*;
 import java.awt.geom.*;
 
 import gameInfo.tile;
+import rules.game;
 import gameInfo.board;
-import mainGame.game;
 
 public class displayBoard{
 	

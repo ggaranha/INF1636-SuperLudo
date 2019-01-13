@@ -14,7 +14,7 @@ public class tile {
 	{
 		posX = x;
 		posY = y;
-		tilePawns = new ArrayList();
+		tilePawns = new ArrayList<pawn>();
 	}
 	
 	public tile(int x, int y, Color c)
@@ -22,7 +22,7 @@ public class tile {
 		posX = x;
 		posY = y;
 		tileColor = c;
-		tilePawns = new ArrayList();
+		tilePawns = new ArrayList<pawn>();
 	}
 	
 	public void setTileColor(Color c)
@@ -162,7 +162,7 @@ public class tile {
 	{
 		List<Color> colors = new ArrayList<Color>();
 
-		tilePawns.forEach(pawnRef ->
+		for(pawn pawnRef : tilePawns)
 		{
 			Color c = pawnRef.getPawnColor();
 
@@ -170,7 +170,7 @@ public class tile {
 			{
 				colors.add(c);
 			}
-		});
+		}
 
 		return colors;
 	}

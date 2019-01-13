@@ -1,4 +1,4 @@
-package mainGame;
+package controller;
 import java.io.File;
 import java.awt.*;
 import java.io.PrintWriter;
@@ -11,6 +11,7 @@ import gameInfo.dice;
 import gameInfo.pawn;
 import gameInfo.player;
 import gameInfo.tile;
+import rules.game;
 
 public class gameSave {
 	
@@ -54,7 +55,9 @@ public class gameSave {
 			//action currentAction;
 			int currentDice, consecutive6;
 			board gameBoard = new board();
-			dice gameDice = new dice();
+			
+			dice.setInstanceNull();
+			dice gameDice = dice.getInstance();
 			
 			player [] gamePlayers = new player[4];
 			gamePlayers[0] = new player("Vermelho", Color.RED, gameBoard, gameBoard.getTile(1, 6), 0, 0);

@@ -1,7 +1,11 @@
-package mainGame;
+package rendering;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import controller.diceChooseAction;
+import controller.diceRollAction;
+import controller.gameSave;
+import rules.game;
 import utilities.utils;
 
 import java.awt.*;
@@ -18,6 +22,8 @@ public class menu extends JPanel{
 	 */
 	private static final long serialVersionUID = 9195280542628481358L;
 	private static menu instance;
+	
+	private JPanel p;
 	
 	public JButton newGameMenu;
 	public JButton loadGameMenu;
@@ -37,15 +43,16 @@ public class menu extends JPanel{
 	public JRadioButton six = new JRadioButton("6", false);
 	
 	
-	public menu(JPanel p, game currentGame)
+	private menu()
 	{
 		super();
 		
-		instance = this;
+		p = new JPanel();
+		p.setLayout(null);
 		
 		Dimension size;
 		in = p.getInsets();
-		mainGame = currentGame;
+		mainGame = game.getInstance();
 		
 		newGameMenu = new JButton("Novo Jogo");
 		p.add(newGameMenu);
@@ -73,12 +80,28 @@ public class menu extends JPanel{
 		p.add(throwDiceMenu);
 		size = throwDiceMenu.getPreferredSize();
 		throwDiceMenu.setBounds(20 + in.left, 225 + in.top, size.width, size.height);
-			
-		diceRollAction throwAction = diceRollAction.getInstance(p, size, in, instance);
+					
+		diceRollAction throwAction = diceRollAction.getInstance(p, size, in);
 		throwDiceMenu.addActionListener(throwAction);
 			
 		diceManual(p, size, in);
 		
+	}
+	
+	public static menu getInstance() {
+		if(instance == null) {
+			instance = new menu();
+		}
+		
+		return instance;
+	}
+	
+	public static void setInstanceNull() {
+		instance = null;
+	}
+	
+	public JPanel getMenuPanel() {
+		return p;
 	}
 	
 	public void diceManual(JPanel p, Dimension size, Insets in) {
@@ -117,12 +140,12 @@ public class menu extends JPanel{
 		size = six.getPreferredSize();
 		six.setBounds(80 + in.left, 410 + in.top, size.width, size.height);
 		
-		diceChooseAction oneAction = new diceChooseAction(p, size, in, 1, instance); 
-		diceChooseAction twoAction = new diceChooseAction(p, size, in, 2, instance);
-		diceChooseAction threeAction = new diceChooseAction(p, size, in, 3, instance);
-		diceChooseAction fourAction = new diceChooseAction(p, size, in, 4, instance);
-		diceChooseAction fiveAction = new diceChooseAction(p, size, in, 5, instance);
-		diceChooseAction sixAction = new diceChooseAction(p, size, in, 6, instance);
+		diceChooseAction oneAction = new diceChooseAction(p, size, in, 1); 
+		diceChooseAction twoAction = new diceChooseAction(p, size, in, 2);
+		diceChooseAction threeAction = new diceChooseAction(p, size, in, 3);
+		diceChooseAction fourAction = new diceChooseAction(p, size, in, 4);
+		diceChooseAction fiveAction = new diceChooseAction(p, size, in, 5);
+		diceChooseAction sixAction = new diceChooseAction(p, size, in, 6);
 		
 		one.addActionListener(oneAction);
 		two.addActionListener(twoAction);
@@ -143,61 +166,6 @@ public class menu extends JPanel{
 		size = diceImage.getPreferredSize();
 		diceImage.setBounds(22 + in.left, 270 + in.top, size.width, size.height);
 		
-	}
-	
-	public void setDiceEnable(boolean e) {
-		
-		throwDiceMenu.setEnabled(e);
-		one.setEnabled(e);
-		two.setEnabled(e);
-		three.setEnabled(e);
-		four.setEnabled(e);
-		five.setEnabled(e);
-		six.setEnabled(e);
-		
-		mainGame.getGameDice().setEnable(e);
-	}
-	
-	public String setDice(int number) {
-		
-		String name = "";
-		
-		mainGame.getGameDice().setValueDice(number);
-		if(number == 6)
-		{
-			mainGame.getGameDice().setConsecutive6(mainGame.getGameDice().getConsecutive6() + 1);
-		}
-		else
-		{
-			mainGame.getGameDice().setConsecutive6(0);
-		}
-		setDiceEnable(false);
-		
-		System.out.printf("Dice: enable: %b", mainGame.getGameDice().isEnable());
-		
-		switch(number) {
-		
-			case 1:
-				name = "src/img/Dado1.png";
-				break;
-			case 2:
-				name = "src/img/Dado2.png";
-				break;
-			case 3:
-				name = "src/img/Dado3.png";
-				break;
-			case 4:
-				name = "src/img/Dado4.png";
-				break;
-			case 5:
-				name = "src/img/Dado5.png";
-				break;
-			case 6:
-				name = "src/img/Dado6.png";
-				break;
-		}
-		
-		return name;		
 	}
 	
 	public void paintComponent(Graphics g) {

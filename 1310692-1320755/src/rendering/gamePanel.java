@@ -1,13 +1,12 @@
-package mainGame;
+package rendering;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 import gameInfo.tile;
-
-import rendering.displayBoard;
-import rendering.displayPawns;
+import controller.boardMouseListener;
+import rules.game;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -24,23 +23,31 @@ public class gamePanel extends JPanel implements Observer{
 	private static gamePanel instance = null;
 	
 	private game mainGame;
-	private menu menuGame;
 	private tile refTile;
 	
-	public gamePanel(game g, menu m)
+	private gamePanel()
 	{
 		super();
-		
-		instance = this;
 
 		setBackground(Color.white);
 		setForeground(Color.white);
 
-		mainGame = g;
-		menuGame = m;
+		mainGame = game.getInstance();
 		
 		mainGame.addObserver(this);
-		this.addMouseListener(boardMouseListener.getInstance(mainGame, menuGame, refTile, instance));
+		this.addMouseListener(new boardMouseListener());
+	}
+	
+	public static gamePanel getInstance() {
+		if(instance == null) {
+			instance = new gamePanel();
+		}
+		
+		return instance;
+	}
+	
+	public static void setInstanceNull() {
+		instance = null;
 	}
 	
 	public void paintComponent(Graphics g)

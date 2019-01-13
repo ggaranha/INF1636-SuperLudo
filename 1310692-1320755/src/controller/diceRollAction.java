@@ -1,4 +1,4 @@
-package mainGame;
+package controller;
 
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -7,24 +7,25 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import rendering.menu;
+import rules.facade;
+
 public class diceRollAction implements ActionListener {
 
 	private static diceRollAction instance;
 	private JPanel jp;
 	private Dimension dsize;
 	private Insets ins;
-	private menu menuGame;
 	
-	private diceRollAction(JPanel p, Dimension size, Insets in, menu m) {
+	private diceRollAction(JPanel p, Dimension size, Insets in) {
 		jp = p;
 		dsize = size;
 		ins = in;
-		menuGame = m;
 	}
 	
-	public static diceRollAction getInstance(JPanel p, Dimension size, Insets in, menu m) {
+	public static diceRollAction getInstance(JPanel p, Dimension size, Insets in) {
 		if(instance == null) {
-			instance = new diceRollAction(p, size, in, m);
+			instance = new diceRollAction(p, size, in);
 		}
 		
 		return instance;
@@ -32,13 +33,18 @@ public class diceRollAction implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
+		facade f = facade.getInstance();
+		
+		menu menuGame = menu.getInstance();
+		
 		menuGame.diceOptions.clearSelection();
-		
-		menuGame.diceNumber = (int) (Math.random() * 6) + 1;
-		
-		menuGame.paintDice(menuGame.setDice(menuGame.diceNumber), jp, dsize, ins);
+				
+		menuGame.paintDice(f.setDice(7), jp, dsize, ins); // 7 é para ser número aleatório
 		
 		menuGame.repaint();
+		
+		f.verifyPawnAvaiableMoves();
 	}
 
 }

@@ -1,20 +1,27 @@
 package gameInfo;
-import java.net.URL;
-import java.applet.*;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class dice{
+	
+	private static dice instance;
+	
 	private int valueDice;
-	
 	private int consecutive6 = 0;
-	
 	private boolean enable = true;
 	
-	public dice()
+	private dice()
 	{
-		valueDice = 1;
+	}
+	
+	public static dice getInstance() {
+		if(instance == null) {
+			instance = new dice();
+		}
+		
+		return instance;
+	}
+	
+	public static void setInstanceNull() {
+		instance = null;
 	}
 		
 	public void setEnable(boolean e) {
@@ -61,8 +68,11 @@ public class dice{
 		
 		valueDice = (int) (Math.random() * 6) + 1;
 		
-		if (valueDice == 6)
+		if (valueDice == 6) {
 			consecutive6++;
+		}else {
+			consecutive6 = 0;
+		}
 		
 		return valueDice;
 	}

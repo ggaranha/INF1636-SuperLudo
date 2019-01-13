@@ -4,9 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.*;
 
 import gameInfo.tile;
+import rules.game;
 import gameInfo.board;
-
-import mainGame.game;
 
 public class displayPawns {
 	
